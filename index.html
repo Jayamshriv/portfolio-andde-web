@@ -14,13 +14,19 @@
     <div id="fullpage">
 <!-- Intro Section -->
 <div class="section" id="intro">
-    <div class="intro-bg"></div>
+    <div class="intro-bg">
+        <!-- <img src="img/spacerr__app.png" alt="Girl in a jacket"> -->
+
+    </div>
     <div class="intro-content">
         <h1 class="intro-title">Jayam Shrivastav</h1>
         <p class="intro-subtitle">Android Developer</p>
     </div>
     <div class="scroll-indicator">↓ Scroll to explore</div>
-    <div class="glowing-circles"></div>
+    <div class="glowing-circles">
+        <!-- <img src="https://logos-world.net/wp-content/uploads/2023/09/Android-Logo-New-500x281.png" alt="Girl in a jacket"> -->
+
+    </div>
 </div>
 
 
@@ -78,59 +84,65 @@
             </div>
         </div>
 
-        <!-- Experience Section -->
-        <div class="section">
-            <div class="content-wrapper">
-                <div class="device-wrapper">
-                    <div class="device">
-                        <div class="screen">
-                            <div class="status-bar">
-                                <span class="time">12:30</span>
-                                <div class="status-icons">
-                                    <span class="wifi">📶</span>
-                                    <span class="battery">🔋</span>
+<!-- Experience Section -->
+<div class="section">
+    <div class="content-wrapper">
+        <div class="device-wrapper">
+            <div class="device">
+                <div class="screen">
+                    <div class="status-bar">
+                        <span class="time">12:30</span>
+                        <div class="status-icons">
+                            <span class="wifi">📶</span>
+                            <span class="battery">🔋</span>
+                        </div>
+                    </div>
+                    <div class="notch"></div>
+                    <div class="app-screen">
+                        <div class="app-header">Experience</div>
+                        <div class="app-content">
+                            <div class="experience-preview" id="experience-preview">
+                                <div class="preview-image">
+                                    <!-- https://logos-world.net/wp-content/uploads/2023/09/Android-Logo-New-500x281.png -->
+                                    <img src="/api/placeholder/280/200" alt="Company Logo" id="experience-image" />
                                 </div>
-                            </div>
-                            <div class="notch"></div>
-                            <div class="app-screen">
-                                <div class="app-header">Experience</div>
-                                <div class="app-content">
-                                    <div class="experience-timeline">
-                                        <div class="timeline-item">
-                                            <span class="date">2023 - Present</span>
-                                            <h4>Android Developer</h4>
-                                            <p>ClickRetina.com</p>
-                                        </div>
-                                        <div class="timeline-item">
-                                            <span class="date">2022 - 2023</span>
-                                            <h4>Android Developer</h4>
-                                            <p>AiVirex Innovations LLP</p>
-                                        </div>
-                                        <div class="timeline-item">
-                                            <span class="date">2020 - 2022</span>
-                                            <h4>Android Developer</h4>
-                                            <p>Radionics Technology</p>
-                                        </div>
+                                <div class="preview-content">
+                                    <h4 id="preview-title">ClickRetina.com</h4>
+                                    <p id="preview-description">Developed commercial Android apps for SEO-related projects, implemented modern Android architecture patterns.</p>
+                                    <div class="tech-stack">
+                                        <span class="tech-badge">Kotlin</span>
+                                        <span class="tech-badge">Jetpack Compose</span>
+                                        <span class="tech-badge">MVVM</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="content right">
-                    <h1>Experience</h1>
-                    <div class="experience-card">
+            </div>
+        </div>
+        <div class="content right">
+            <h1>Experience</h1>
+            <div class="timeline">
+                <div class="timeline-item active" data-company="clickretina">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
                         <h3>Android Developer</h3>
-                        <p>ClickRetina.com | 2023 - Present</p>
+                        <p class="timeline-date">2023 - Present</p>
+                        <p class="company">ClickRetina.com</p>
                         <ul>
                             <li>Developed commercial Android apps for SEO-related projects</li>
                             <li>Enhanced user engagement and performance in key apps</li>
                             <li>Integrated payment gateways and external APIs</li>
                         </ul>
                     </div>
-                    <div class="experience-card">
+                </div>
+                <div class="timeline-item" data-company="aivirex">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
                         <h3>Android Developer</h3>
-                        <p>AiVirex Innovations LLP | 2022 - 2023</p>
+                        <p class="timeline-date">2022 - 2023</p>
+                        <p class="company">AiVirex Innovations LLP</p>
                         <ul>
                             <li>Created high-performing mobile apps for various clients</li>
                             <li>Used Jetpack Compose and Kotlin for modern app development</li>
@@ -138,49 +150,52 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Education & Achievements Section -->
-        <div class="section">
-            <div class="content-wrapper">
-                <div class="content left">
-                    <h1>Education & Achievements</h1>
-                    <div class="education-card">
-                        <h3>Bachelor of Technology in Computer Science</h3>
-                        <p>XYZ University | 2016 - 2020</p>
-                    </div>
-                    <div class="achievements-list">
-                        <h3>Achievements</h3>
+                <div class="timeline-item" data-company="radionics">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Android Developer</h3>
+                        <p class="timeline-date">2020 - 2022</p>
+                        <p class="company">Radionics Technology</p>
                         <ul>
-                            <li>Top Performer in Android Development Internships</li>
-                            <li>1st Place in Regional Android Dev Hackathon</li>
-                            <li>Published articles on Kotlin & Android App Development</li>
+                            <li>Led development of core Android applications</li>
+                            <li>Implemented real-time data synchronization features</li>
+                            <li>Optimized app performance and reduced crash rates</li>
                         </ul>
                     </div>
                 </div>
-                <div class="device-wrapper">
-                    <div class="device">
-                        <div class="screen">
-                            <div class="status-bar">
-                                <span class="time">12:30</span>
-                                <div class="status-icons">
-                                    <span class="wifi">📶</span>
-                                    <span class="battery">🔋</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Education Section -->
+<div class="section">
+    <div class="content-wrapper">
+        <div class="device-wrapper">
+            <div class="device">
+                <div class="screen">
+                    <div class="status-bar">
+                        <span class="time">12:30</span>
+                        <div class="status-icons">
+                            <span class="wifi">📶</span>
+                            <span class="battery">🔋</span>
+                        </div>
+                    </div>
+                    <div class="notch"></div>
+                    <div class="app-screen">
+                        <div class="app-header">Education</div>
+                        <div class="app-content">
+                            <div class="education-preview" id="education-preview">
+                                <div class="preview-image">
+                                    <!-- College/University logo placeholder -->
+                                    <img src="/api/placeholder/280/200" alt="Institution Logo" id="education-image" />
                                 </div>
-                            </div>
-                            <div class="notch"></div>
-                            <div class="app-screen">
-                                <div class="app-header">Education</div>
-                                <div class="app-content">
-                                    <div class="education-timeline">
-                                        <div class="timeline-item">
-                                            <div class="certificate-card">
-                                                <span class="cert-icon">🎓</span>
-                                                <h4>XYZ University</h4>
-                                                <p>Bachelor of Technology in Computer Science</p>
-                                            </div>
-                                        </div>
+                                <div class="preview-content">
+                                    <h4 id="edu-preview-title">B.Tech in Computer Science</h4>
+                                    <p id="edu-preview-description">Specialized in Computer Science with focus on Mobile Application Development and Software Engineering.</p>
+                                    <div class="achievement-badges">
+                                        <span class="achievement-badge">Dean's List</span>
+                                        <span class="achievement-badge">Research Project</span>
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +204,39 @@
                 </div>
             </div>
         </div>
+        <div class="content right">
+            <h1>Education</h1>
+            <div class="timeline">
+                <div class="timeline-item active" data-education="btech">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Bachelor of Technology</h3>
+                        <p class="timeline-date">2016 - 2020</p>
+                        <p class="institution">XYZ University</p>
+                        <ul>
+                            <li>Computer Science Engineering</li>
+                            <li>CGPA: 8.5/10</li>
+                            <li>Android Development Club Lead</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" data-education="internship">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Android Development Internship</h3>
+                        <p class="timeline-date">Summer 2019</p>
+                        <p class="institution">DRDO</p>
+                        <ul>
+                            <li>Developed Android applications for internal use</li>
+                            <li>Worked with senior developers on critical projects</li>
+                            <li>Implemented secure communication protocols</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Projects Section -->
         <div class="section">
@@ -209,14 +257,16 @@
                                 <div class="app-content">
                                     <div class="project-grid">
                                         <div class="project-card">
-                                            <div class="project-image"></div>
+                                            <div class="project-image">
+                                                <img src="img/spacerr__app.png" alt="Girl in a jacket" height="40px">
+                                            </div>
                                             <h4>Safety</h4>
-                                            <p>Personal Safety App with Real-time Location Sharing</p>
+                                            <h5>Personal Safety App with Real-time Location Sharing</h5>
                                         </div>
                                         <div class="project-card">
                                             <div class="project-image"></div>
                                             <h4>Spacerr</h4>
-                                            <p>Space Rental App</p>
+                                            <h5>Space Exploration App</h5>
                                         </div>
                                     </div>
                                 </div>
