@@ -446,3 +446,106 @@ p {
         justify-content: center;
     }
 }
+/* Entire screen styled for depth and interaction */
+#intro {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #111;
+    color: #fff;
+    padding: 50px;
+    text-align: center;
+    z-index: 1;
+}
+
+.intro-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/cube-rough.png');
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+}
+
+.intro-title {
+    font-size: 4em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(50px);
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.7);
+    will-change: transform, opacity;
+}
+
+.intro-subtitle {
+    font-size: 1.5em;
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(30px);
+    color: #ddd;
+    transition: 0.3s ease;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    font-size: 1.5em;
+    color: #fff;
+    opacity: 0;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.scroll-indicator:hover {
+    transform: translateY(5px);
+}
+
+.glowing-circles {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 200px;
+    width: 200px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+}
+
+/* Background and Parallax */
+@keyframes background-motion {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 50% 50%; }
+    100% { background-position: 100% 100%; }
+}
+
+#intro {
+    background: linear-gradient(45deg, #ff1d58, #ff7676);
+    animation: background-motion 10s infinite linear;
+}
