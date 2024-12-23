@@ -47,7 +47,7 @@
                     <div class="device">
                         <div class="screen">
                             <div class="status-bar">
-                                <span class="time">12:30</span>
+                                <h6>12:30</h6>
                                 <div class="status-icons">
                                     <span class="wifi">📶</span>
                                     <span class="battery">🔋</span>
@@ -91,10 +91,10 @@
             <div class="device">
                 <div class="screen">
                     <div class="status-bar">
-                        <span class="time">12:30</span>
+                        <h6>12:30</h6>
                         <div class="status-icons">
-                            <span class="wifi">📶</span>
-                            <span class="battery">🔋</span>
+                            <!-- <span class="wifi">📶</span> -->
+                            <!-- <span class="battery">🔋</span> -->
                         </div>
                     </div>
                     <div class="notch"></div>
@@ -175,10 +175,10 @@
             <div class="device">
                 <div class="screen">
                     <div class="status-bar">
-                        <span class="time">12:30</span>
+                        <h6>12:30</h6>
                         <div class="status-icons">
-                            <span class="wifi">📶</span>
-                            <span class="battery">🔋</span>
+                            <!-- <span class="wifi">📶</span> -->
+                            <!-- <span class="battery">🔋</span> -->
                         </div>
                     </div>
                     <div class="notch"></div>
@@ -238,65 +238,78 @@
     </div>
 </div>
 
-        <!-- Projects Section -->
-        <div class="section">
-            <div class="content-wrapper">
-                <div class="device-wrapper">
-                    <div class="device">
-                        <div class="screen">
-                            <div class="status-bar">
-                                <span class="time">12:30</span>
-                                <div class="status-icons">
-                                    <span class="wifi">📶</span>
-                                    <span class="battery">🔋</span>
-                                </div>
-                            </div>
-                            <div class="notch"></div>
-                            <div class="app-screen">
-                                <div class="app-header">Projects</div>
-                                <div class="app-content">
-                                    <div class="project-grid">
-                                        <div class="project-card">
-                                            <div class="project-image">
-                                                <img src="img/spacerr__app.png" alt="Girl in a jacket" height="40px">
-                                            </div>
-                                            <h4>Safety</h4>
-                                            <h5>Personal Safety App with Real-time Location Sharing</h5>
-                                        </div>
-                                        <div class="project-card">
-                                            <div class="project-image"></div>
-                                            <h4>Spacerr</h4>
-                                            <h5>Space Exploration App</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<!-- Projects Section -->
+<div class="section">
+    <div class="content-wrapper">
+        <div class="device-wrapper">
+            <div class="device">
+                <div class="screen">
+                    <div class="status-bar">
+                        <h6>12:30</h6>
+                        <div class="status-icons">
+                            <!-- <span class="wifi">📶</span> -->
+                            <!-- <span class="battery">🔋</span> -->
                         </div>
                     </div>
-                </div>
-                <div class="content right">
-                    <h1>Projects</h1>
-                    <div class="project-showcase">
-                        <div class="project-card major">
-                            <h3>Safety App</h3>
-                            <p>Real-time location tracking for personal safety</p>
-                            <ul>
-                                <li>Developed with Kotlin, Firebase, and Google Maps API</li>
-                                <li>Real-time user location updates to trusted contacts</li>
-                            </ul>
-                        </div>
-                        <div class="project-card major">
-                            <h3>Spacerr</h3>
-                            <p>Space rental management for individuals and businesses</p>
-                            <ul>
-                                <li>Built with Kotlin, Firebase, and Retrofit</li>
-                                <li>Seamless search, booking, and payment integration</li>
-                            </ul>
+                    <div class="notch"></div>
+                    <div class="app-screen">
+                        <div class="app-header">Projects</div>
+                        <div class="app-content">
+                            <div class="project-grid">
+                                <div class="project-card" data-project="safety">
+                                    <div class="project-image">
+                                        <img src="img/spacerr__app.png" alt="Safety App" height="40">
+                                    </div>
+                                    <h4>Safety</h4>
+                                    <h5>Personal Safety App with Real-time Location Sharing</h5>
+                                </div>
+                                <div class="project-card" data-project="spacerr">
+                                    <div class="project-image"></div>
+                                    <h4>Spacerr</h4>
+                                    <h5>Space Exploration App</h5>
+                                </div>
+                            </div>
+                            
+                            <!-- Slideshow Container -->
+                            <div class="slideshow-container hidden">
+                                <button class="close-slideshow">×</button>
+                                <button class="nav-btn prev">❮</button>
+                                <button class="nav-btn next">❯</button>
+                                <div class="slides"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="content right">
+            <h1>Projects</h1>
+            <div class="project-showcase">
+                <div class="project-content">
+                    <h3>Safety App</h3>
+                    <p>Real-time location tracking for personal safety</p>
+                    <div class="content-data">
+                        <ul>
+                            <li>Developed with Kotlin, Firebase, and Google Maps API</li>
+                            <li>Real-time user location updates to trusted contacts</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Spacerr</h3>
+                    <p>Space rental management for individuals and businesses</p>
+                    <div class="content-data">
+                        <ul>
+                            <li>Built with Kotlin, Firebase, and Retrofit</li>
+                            <li>Seamless search, booking, and payment integration</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Contact Section -->
         <div class="section">
@@ -325,7 +338,7 @@
                     <div class="device">
                         <div class="screen">
                             <div class="status-bar">
-                                <span class="time">12:30</span>
+                                <h6>12:30</h6>
                                 <div class="status-icons">
                                     <span class="wifi">📶</span>
                                     <span class="battery">🔋</span>

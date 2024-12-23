@@ -199,10 +199,30 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
     const introBg = document.querySelector('.intro-bg img');
 
-    function changeImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        introBg.src = images[currentIndex];
+    function changeImage(imageIndex) {
+        const imageElement = document.querySelector('.current-slide-image');
+        if (!imageElement) {
+            console.error('Image element not found in DOM.');
+            return;
+        }
+    
+        const newSrc = 'img/spacerr__app.png';
+        fetch(newSrc)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Image not found: ${newSrc}`);
+                }
+                return res.blob();
+            })
+            .then(() => {
+                imageElement.src = newSrc;
+            })
+            .catch((err) => {
+                console.error(err);
+                imageElement.src = `img/placeholder.jpg`; // Fallback placeholder
+            });
     }
+    
 
     setInterval(changeImage, 3000); // Change image every 3 seconds (adjust as needed)
 });
@@ -309,3 +329,139 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.timeline-item[data-education]').click();
 });
 
+// Project image data
+const projectImages = {
+    safety: [
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+    ],
+    spacerr: [
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+    ]
+};
+
+class Slideshow {
+    constructor() {
+        this.slideshowContainer = document.querySelector('.slideshow-container');
+        this.slidesContainer = document.querySelector('.slides');
+        this.currentIndex = 0;
+        this.slides = [];
+        this.slideInterval = null;
+        this.projectCards = document.querySelectorAll('.project-card');
+
+        if (this.slideshowContainer && this.slidesContainer && this.projectCards.length) {
+            this.initializeEventListeners();
+        } else {
+            console.error('Required DOM elements for the slideshow are missing.');
+        }
+    }
+
+    initializeEventListeners() {
+        // Project card click handlers
+        this.projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const project = card.dataset.project;
+                if (projectImages[project]) {
+                    this.loadProject(project);
+                } else {
+                    console.error(`No images found for project: ${project}`);
+                }
+            });
+        });
+
+        // Navigation button handlers
+        document.querySelector('.prev').addEventListener('click', () => this.navigate(-1));
+        document.querySelector('.next').addEventListener('click', () => this.navigate(1));
+        document.querySelector('.close-slideshow').addEventListener('click', () => this.close());
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (this.slideshowContainer.classList.contains('hidden')) return;
+
+            switch (e.key) {
+                case 'ArrowLeft':
+                    this.navigate(-1);
+                    break;
+                case 'ArrowRight':
+                    this.navigate(1);
+                    break;
+                case 'Escape':
+                    this.close();
+                    break;
+            }
+        });
+    }
+
+    loadProject(project) {
+        this.currentIndex = 0;
+        this.slidesContainer.innerHTML = '';
+        this.slides = [];
+
+        // Create slides
+        projectImages[project].forEach((src, index) => {
+            const slide = document.createElement('div');
+            slide.className = `slide ${index === 0 ? 'active' : ''}`;
+
+            const img = document.createElement('img');
+            img.src = src.startsWith('http') ? src : `img/${src}`;
+            img.alt = `${project} screenshot ${index + 1}`;
+
+            slide.appendChild(img);
+            this.slidesContainer.appendChild(slide);
+            this.slides.push(slide);
+        });
+
+        // Show slideshow
+        this.slideshowContainer.classList.remove('hidden');
+
+        // Start auto-advance
+        this.startAutoAdvance();
+    }
+
+    navigate(direction) {
+        // Remove active class from current slide
+        this.slides[this.currentIndex].classList.remove('active');
+
+        // Calculate new index
+        this.currentIndex = (this.currentIndex + direction + this.slides.length) % this.slides.length;
+
+        // Add active class to new slide
+        this.slides[this.currentIndex].classList.add('active');
+
+        // Reset auto-advance timer
+        this.startAutoAdvance();
+    }
+
+    startAutoAdvance() {
+        // Clear existing interval
+        if (this.slideInterval) {
+            clearInterval(this.slideInterval);
+        }
+
+        // Start new interval
+        this.slideInterval = setInterval(() => {
+            this.navigate(1);
+        }, 1000);
+    }
+
+    close() {
+        this.slideshowContainer.classList.add('hidden');
+        if (this.slideInterval) {
+            clearInterval(this.slideInterval);
+        }
+    }
+}
+
+// Initialize slideshow when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new Slideshow();
+});
