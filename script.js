@@ -308,3 +308,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.timeline-item[data-company]').click();
     document.querySelector('.timeline-item[data-education]').click();
 });
+
