@@ -552,7 +552,7 @@ androidLogoContainer.style.alignItems = 'center';
 androidLogoContainer.style.justifyContent = 'center';
 document.body.appendChild(androidLogoContainer);
 
-// Insert the Android SVG logo
+// Initialize Android SVG with enhanced eyes
 androidLogoContainer.innerHTML = `
 <svg height="600" width="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" transform="translate(-30, 50)">
   <!-- Android head -->
@@ -560,67 +560,278 @@ androidLogoContainer.innerHTML = `
     <path d="m263.837 306.59 21.9331-37.9944c1.2377-2.12998.48933-4.83565-1.61189-6.07335-2.1012-1.23768-4.83565-.5181-6.04456 1.61189l-22.221 38.4837c-16.9536-7.74281-36.0371-12.0604-56.5599-12.0604-20.5227 0-39.6063 4.31754-56.5599 12.0604l-22.221-38.4837c-1.2377-2.12999-3.94336-2.84957-6.07335-1.61189-2.13 1.2377-2.84959 3.94337-1.61189 6.07335l21.9331 37.9944c-37.8217 20.494-63.4392 58.7762-67.6703 103.592h264.407c-4.2312-44.8161-29.8487-83.0984-67.6991-103.592zm-125.209 66.4614c-6.13092 0-11.0817-4.97957-11.0817-11.0817 0-6.13093 4.97957-11.0817 11.0817-11.0817 6.13092 0 11.0817 4.97956 11.0817 11.0817.0289 6.10212-4.95079 11.0817-11.0817 11.0817zm121.381 0c-6.13091 0-11.0817-4.97957-11.0817-11.0817 0-6.13093 4.97958-11.0817 11.0817-11.0817 6.13093 0 11.0817 4.97956 11.0817 11.0817.0288 6.10212-4.95077 11.0817-11.0817 11.0817z"
     fill="#32de84" stroke-width=".288"/>
   </g>
+  
   <!-- Left Eye -->
-<g id="leftEye">
-  <ellipse cx="155" cy="220" ry="40" rx="30" fill="#fff"></ellipse> <!-- White Sclera -->
-  <ellipse cx="155" cy="230" ry="22" rx="15" fill="#000"></ellipse> <!-- Pupil -->
-</g>
-<!-- Right Eye -->
-<g id="rightEye">
-  <ellipse cx="385" cy="220" ry="40" rx="30" fill="#fff"></ellipse> <!-- White Sclera -->
-  <ellipse cx="385" cy="230" ry="22" rx="15" fill="#000"></ellipse> <!-- Pupil -->
-</g>
+  <g id="leftEye">
+    <!-- Mask for eye content -->
+    <mask id="leftEyeMask">
+      <ellipse cx="155" cy="220" ry="40" rx="30" fill="white"/>
+    </mask>
+    
+    <!-- Eye content group with mask -->
+    <g mask="url(#leftEyeMask)">
+      <!-- Enhanced sclera gradient -->
+      <defs>
+        <radialGradient id="scleraGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+          <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+          <stop offset="85%" style="stop-color:rgb(245,245,245);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(235,235,235);stop-opacity:1" />
+        </radialGradient>
+      </defs>
+      <ellipse cx="155" cy="220" ry="40" rx="30" fill="url(#scleraGradient)"/>
+      
+      <!-- Eye components group for zoom -->
+      <g id="leftEyeComponents">
+        <!-- Iris with enhanced gradient -->
+        <ellipse id="leftIris" cx="155" cy="230" ry="25" rx="20" fill="#39935c">
+          <animate attributeName="ry" values="27;26;27" dur="3s" repeatCount="indefinite"/>
+        </ellipse>
+        
+        <!-- Pupil -->
+        <ellipse id="leftPupil" cx="155" cy="230" ry="15" rx="12" fill="#000"/>
+        
+        <!-- Enhanced eye highlights -->
+        <g id="leftHighlights">
+          <!-- Main catchlight -->
+          <ellipse cx="148" cy="220" rx="6" ry="4" fill="#fff" opacity="0.8" transform="rotate(-15)"/>
+          <!-- Secondary highlight -->
+          <ellipse cx="162" cy="215" rx="3" ry="2" fill="#fff" opacity="0.5"/>
+          <!-- Bottom reflection -->
+          <ellipse cx="155" cy="240" rx="8" ry="2" fill="#fff" opacity="0.2"/>
+        </g>
+      </g>
+    </g>
+  </g>
 
+  <!-- Right Eye -->
+  <g id="rightEye">
+    <!-- Mask for eye content -->
+    <mask id="rightEyeMask">
+      <ellipse cx="385" cy="220" ry="40" rx="30" fill="white"/>
+    </mask>
+    
+    <!-- Eye content group with mask -->
+    <g mask="url(#rightEyeMask)">
+      <ellipse cx="385" cy="220" ry="40" rx="30" fill="url(#scleraGradient)"/>
+      
+      <!-- Eye components group for zoom -->
+      <g id="rightEyeComponents">
+        <!-- Iris with enhanced gradient -->
+        <ellipse id="rightIris" cx="385" cy="230" ry="25" rx="20" fill="#39935c">
+          <animate attributeName="ry" values="27;26;27" dur="3s" repeatCount="indefinite"/>
+        </ellipse>
+        
+        <!-- Pupil -->
+        <ellipse id="rightPupil" cx="385" cy="230" ry="15" rx="12" fill="#000"/>
+        
+        <!-- Enhanced eye highlights -->
+        <g id="rightHighlights">
+          <!-- Main catchlight -->
+          <ellipse cx="378" cy="220" rx="6" ry="4" fill="#fff" opacity="0.8" transform="rotate(-15)"/>
+          <!-- Secondary highlight -->
+          <ellipse cx="392" cy="215" rx="3" ry="2" fill="#fff" opacity="0.5"/>
+          <!-- Bottom reflection -->
+          <ellipse cx="385" cy="240" rx="8" ry="2" fill="#fff" opacity="0.2"/>
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>
 `;
 
+class AndroidEyesAnimation {
+    constructor() {
+        this.container = androidLogoContainer;
+        this.leftPupil = this.container.querySelector('#leftPupil');
+        this.rightPupil = this.container.querySelector('#rightPupil');
+        this.leftIris = this.container.querySelector('#leftIris');
+        this.rightIris = this.container.querySelector('#rightIris');
+        this.leftHighlights = this.container.querySelector('#leftHighlights');
+        this.rightHighlights = this.container.querySelector('#rightHighlights');
+        this.leftEyeComponents = this.container.querySelector('#leftEyeComponents');
+        this.rightEyeComponents = this.container.querySelector('#rightEyeComponents');
+        
+        this.config = {
+            maxPupilOffset: 12,
+            blinkInterval: { min: 2000, max: 5000 },
+            surpriseDuration: 800,
+            followSpeed: 0.15,
+            zoomRange: {
+                min: 0.85,  // Maximum zoom out
+                max: 1.15   // Maximum zoom in
+            },
+            maxDistance: 500 // Maximum distance to consider for zoom (in pixels)
+        };
 
-// References to the eye pupil elements (now <ellipse>)
-const leftPupil = androidLogoContainer.querySelector('#leftEye ellipse:nth-child(2)');
-const rightPupil = androidLogoContainer.querySelector('#rightEye ellipse:nth-child(2)');
+        this.state = {
+            isBlinking: false,
+            isSurprised: false,
+            lastBlinkTime: Date.now(),
+            currentPupilPos: { x: 0, y: 0 },
+            originalPupilScale: 1
+        };
 
-// Eye movement logic
-document.addEventListener('mousemove', (event) => {
-  // Get center coordinates of the eyes
-  const containerRect = androidLogoContainer.getBoundingClientRect();
-  const logoCenterX = containerRect.left + containerRect.width / 2;
-  const logoCenterY = containerRect.top + containerRect.height / 2;
+        this.init();
+    }
 
-  // Eye centers
-  const leftEyeCenterX = logoCenterX - 100; // Adjusted based on svg
-  const rightEyeCenterX = logoCenterX + 100;
-  const eyesCenterY = logoCenterY - 30;
+    init() {
+        this.startBlinking();
+        this.addEventListeners();
+        this.startIdleMovement();
+    }
 
-  // Sclera dimensions
-  const scleraRX = 30; // Horizontal radius
-  const scleraRY = 40; // Vertical radius
+    addEventListeners() {
+        document.addEventListener('mousemove', (e) => {
+            this.handleMouseMove(e);
+            this.handleZoom(e);
+        });
+        document.addEventListener('click', this.handleClick.bind(this));
+        document.addEventListener('mouseenter', () => this.blink(true));
+    }
 
-  // Pupil movement limit (constrained to sclera)
-  const maxOffsetX = scleraRX - 15; // Leave padding to keep within sclera
-  const maxOffsetY = scleraRY - 15;
+    handleZoom(event) {
+        const rect = this.container.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
 
-  // Calculate new position for the pupil
-  function calculatePupilOffset(centerX, centerY) {
-    const dx = event.clientX - centerX;
-    const dy = event.clientY - centerY;
+        // Calculate distance from cursor to center of container
+        const dx = event.clientX - centerX;
+        const dy = event.clientY - centerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-    // Get angle and restrict movement within the boundary
-    const angle = Math.atan2(dy, dx);
-    const distance = Math.min(Math.sqrt(dx ** 2 + dy ** 2), maxOffsetX);
-    const offsetX = Math.min(maxOffsetX, distance * Math.cos(angle));
-    const offsetY = Math.min(maxOffsetY, distance * Math.sin(angle));
+        // Calculate zoom factor based on distance
+        const normalizedDistance = Math.min(distance, this.config.maxDistance) / this.config.maxDistance;
+        const zoomFactor = this.config.zoomRange.max - 
+            (normalizedDistance * (this.config.zoomRange.max - this.config.zoomRange.min));
 
-    return { offsetX, offsetY };
-  }
+        // Apply zoom to eye components
+        gsap.to([this.leftEyeComponents, this.rightEyeComponents], {
+            duration: 0.5,
+            scale: zoomFactor,
+            transformOrigin: "center center",
+            ease: "power2.out"
+        });
+    }
 
-  // Calculate offsets for both eyes
-  const leftOffset = calculatePupilOffset(leftEyeCenterX, eyesCenterY);
-  const rightOffset = calculatePupilOffset(rightEyeCenterX, eyesCenterY);
+    handleMouseMove(event) {
+        const rect = this.container.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
 
-  // Apply constrained movements to the pupils
-  leftPupil.setAttribute('cx', 155 + leftOffset.offsetX);
-  leftPupil.setAttribute('cy', 230 + leftOffset.offsetY);
-  rightPupil.setAttribute('cx', 385 + rightOffset.offsetX);
-  rightPupil.setAttribute('cy', 230 + rightOffset.offsetY);
+        let dx = (event.clientX - centerX) / rect.width;
+        let dy = (event.clientY - centerY) / rect.height;
+        
+        dx = Math.max(-0.5, Math.min(0.5, dx));
+        dy = Math.max(-0.5, Math.min(0.5, dy));
 
-});
+        this.moveEyes(dx, dy);
+    }
+
+    moveEyes(dx, dy) {
+        const targetX = dx * this.config.maxPupilOffset;
+        const targetY = dy * this.config.maxPupilOffset;
+
+        // Move pupils and irises
+        gsap.to([this.leftPupil, this.rightPupil, this.leftIris, this.rightIris], {
+            duration: 0.3,
+            ease: "power2.out",
+            x: targetX,
+            y: targetY
+        });
+
+        // Move highlights in opposite direction slightly
+        gsap.to([this.leftHighlights, this.rightHighlights], {
+            duration: 0.3,
+            ease: "power2.out",
+            x: targetX * -0.2,
+            y: targetY * -0.2
+        });
+
+        // Adjust pupil size based on distance from center
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const pupilScale = Math.max(0.8, 1 - (distance * 0.2));
+        
+        gsap.to([this.leftPupil, this.rightPupil], {
+            duration: 0.3,
+            scale: pupilScale,
+            transformOrigin: "center center"
+        });
+    }
+
+    handleClick() {
+        if (this.state.isSurprised) return;
+        
+        this.state.isSurprised = true;
+        
+        gsap.timeline()
+            .to([this.leftPupil, this.rightPupil], {
+                duration: 0.1,
+                scale: 1.3,
+                ease: "power2.out"
+            })
+            .to([this.leftPupil, this.rightPupil], {
+                duration: 0.3,
+                scale: 1,
+                ease: "power2.out",
+                onComplete: () => {
+                    this.state.isSurprised = false;
+                }
+            });
+    }
+
+    startIdleMovement() {
+        const makeRandomMovement = () => {
+            if (!this.state.isSurprised) {
+                const randomX = (Math.random() - 0.5) * 0.2;
+                const randomY = (Math.random() - 0.5) * 0.2;
+                this.moveEyes(randomX, randomY);
+            }
+            
+            setTimeout(makeRandomMovement, Math.random() * 3000 + 2000);
+        };
+        
+        setTimeout(makeRandomMovement, 2000);
+    }
+
+    blink(immediate = false) {
+        if (this.state.isBlinking) return;
+        
+        this.state.isBlinking = true;
+        const duration = immediate ? 0.15 : 0.2;
+
+        gsap.timeline()
+            .to([this.leftEyelid, this.rightEyelid], {
+                duration: duration / 2,
+                opacity: 1,
+                ease: "power1.in"
+            })
+            .to([this.leftEyelid, this.rightEyelid], {
+                duration: duration / 2,
+                opacity: 0,
+                ease: "power1.out",
+                onComplete: () => {
+                    this.state.isBlinking = false;
+                    this.state.lastBlinkTime = Date.now();
+                }
+            });
+    }
+
+    startBlinking() {
+        const checkBlink = () => {
+            const now = Date.now();
+            const timeSinceLastBlink = now - this.state.lastBlinkTime;
+            const randomInterval = Math.random() * 
+                (this.config.blinkInterval.max - this.config.blinkInterval.min) + 
+                this.config.blinkInterval.min;
+
+            if (timeSinceLastBlink > randomInterval && !this.state.isSurprised) {
+                this.blink();
+            }
+            requestAnimationFrame(checkBlink);
+        };
+        checkBlink();
+    }
+}
+
+// Initialize the enhanced eyes animation
+const androidEyes = new AndroidEyesAnimation();
