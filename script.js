@@ -31,6 +31,28 @@ function updateTime() {
 updateTime();
 setInterval(updateTime, 60000);
 
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.intro-slideshow img');
+    let currentImageIndex = 0;
+
+    function showNextImage() {
+        // Remove active class from current image
+        images[currentImageIndex].classList.remove('active');
+        
+        // Update index
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        
+        // Add active class to next image
+        images[currentImageIndex].classList.add('active');
+    }
+
+    // Show first image immediately
+    images[0].classList.add('active');
+    
+    // Change image every 3 seconds
+    setInterval(showNextImage, 3000);
+});
+
 function animateSection(section, sectionIndex) {
     const content = section.querySelector('.content');
     const device = section.querySelector('.device-wrapper');
@@ -344,21 +366,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // Project image data
 const projectImages = {
     safety: [
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
+        'https://via.placeholder.com/500/FF0000',
+        'https://via.placeholder.com/500/00FF00',
+        'https://via.placeholder.com/500/0000FF',
     ],
     spacerr: [
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-        'https://images.unsplash.com/photo-1709917241494-48fdf74f2640?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZSUyMGltYWdlc3xlbnwwfDF8MHx8fDI%3D',
-    ]
+        'https://via.placeholder.com/500/FFFF00',
+        'https://via.placeholder.com/500/FF00FF',
+        'https://via.placeholder.com/500/00FFFF',
+    ],
 };
 
 class Slideshow {
@@ -424,7 +440,7 @@ class Slideshow {
             slide.className = `slide ${index === 0 ? 'active' : ''}`;
 
             const img = document.createElement('img');
-            img.src = src.startsWith('http') ? src : `img/${src}`;
+            img.src = src;
             img.alt = `${project} screenshot ${index + 1}`;
 
             slide.appendChild(img);
@@ -440,6 +456,8 @@ class Slideshow {
     }
 
     navigate(direction) {
+        if (!this.slides.length) return;
+
         // Remove active class from current slide
         this.slides[this.currentIndex].classList.remove('active');
 
@@ -454,21 +472,19 @@ class Slideshow {
     }
 
     startAutoAdvance() {
-        // Clear existing interval
         if (this.slideInterval) {
             clearInterval(this.slideInterval);
         }
-
-        // Start new interval
         this.slideInterval = setInterval(() => {
             this.navigate(1);
-        }, 1000);
+        }, 3000);
     }
 
     close() {
         this.slideshowContainer.classList.add('hidden');
         if (this.slideInterval) {
             clearInterval(this.slideInterval);
+            this.slideInterval = null;
         }
     }
 }
@@ -477,6 +493,7 @@ class Slideshow {
 document.addEventListener('DOMContentLoaded', () => {
     new Slideshow();
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize fullPage.js
     new fullpage('#fullpage', {
@@ -564,8 +581,9 @@ androidLogoContainer.style.alignItems = 'center';
 androidLogoContainer.style.justifyContent = 'center';
 document.body.appendChild(androidLogoContainer);
 
-// Initialize Android SVG with enhanced eyes
-androidLogoContainer.innerHTML = `
+// Initialize Android SVG with enhanced realistic eyes
+androidLogoContainer.innerHTML = 
+`
 <svg height="600" width="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" transform="translate(-30, 50)">
   <!-- Android head -->
   <g transform="translate(-130 ,-500) scale(2)" >
@@ -573,77 +591,70 @@ androidLogoContainer.innerHTML = `
     fill="#32de84" stroke-width=".288"/>
   </g>
   
-  <!-- Left Eye -->
+  <!-- Enhanced Left Eye -->
   <g id="leftEye">
-    <!-- Mask for eye content -->
     <mask id="leftEyeMask">
       <ellipse cx="155" cy="220" ry="40" rx="30" fill="white"/>
     </mask>
     
-    <!-- Eye content group with mask -->
     <g mask="url(#leftEyeMask)">
-      <!-- Enhanced sclera gradient -->
       <defs>
-        <radialGradient id="scleraGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <radialGradient id="enhancedScleraGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
           <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
-          <stop offset="85%" style="stop-color:rgb(245,245,245);stop-opacity:1" />
-          <stop offset="100%" style="stop-color:rgb(235,235,235);stop-opacity:1" />
+          <stop offset="80%" style="stop-color:rgb(245,245,245);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(230,230,230);stop-opacity:1" />
+        </radialGradient>
+        <radialGradient id="enhancedIrisGradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" style="stop-color:#4CAF50"/>
+          <stop offset="70%" style="stop-color:#388E3C"/>
+          <stop offset="100%" style="stop-color:#2E7D32"/>
         </radialGradient>
       </defs>
-      <ellipse cx="155" cy="220" ry="40" rx="30" fill="url(#scleraGradient)"/>
       
-      <!-- Eye components group for zoom -->
+      <ellipse cx="155" cy="220" ry="40" rx="30" fill="url(#enhancedScleraGradient)"/>
+      
       <g id="leftEyeComponents">
-        <!-- Iris with enhanced gradient -->
-        <ellipse id="leftIris" cx="155" cy="230" ry="25" rx="20" fill="#39935c">
-          <animate attributeName="ry" values="27;26;27" dur="3s" repeatCount="indefinite"/>
+        <ellipse id="leftIris" cx="155" cy="220" ry="25" rx="20" fill="url(#enhancedIrisGradient)">
+          <animate attributeName="ry" values="25;24;25" dur="3s" repeatCount="indefinite"/>
         </ellipse>
         
-        <!-- Pupil -->
-        <ellipse id="leftPupil" cx="155" cy="230" ry="15" rx="12" fill="#000"/>
+        <ellipse id="leftPupil" cx="155" cy="220" ry="15" rx="12" fill="#000">
+          <animate attributeName="ry" values="15;14;15" dur="3s" repeatCount="indefinite"/>
+        </ellipse>
         
-        <!-- Enhanced eye highlights -->
         <g id="leftHighlights">
-          <!-- Main catchlight -->
-          <ellipse cx="148" cy="220" rx="6" ry="4" fill="#fff" opacity="0.8" transform="rotate(-15)"/>
-          <!-- Secondary highlight -->
-          <ellipse cx="162" cy="215" rx="3" ry="2" fill="#fff" opacity="0.5"/>
-          <!-- Bottom reflection -->
-          <ellipse cx="155" cy="240" rx="8" ry="2" fill="#fff" opacity="0.2"/>
+          <ellipse cx="148" cy="210" rx="6" ry="4" fill="#fff" opacity="0.9" transform="rotate(-15)"/>
+          <ellipse cx="162" cy="205" rx="3" ry="2" fill="#fff" opacity="0.6"/>
+          <ellipse cx="155" cy="230" rx="8" ry="2" fill="#fff" opacity="0.3"/>
+          <circle cx="155" cy="215" r="1" fill="#fff" opacity="0.8"/>
         </g>
       </g>
     </g>
   </g>
 
-  <!-- Right Eye -->
+  <!-- Enhanced Right Eye (mirror of left) -->
   <g id="rightEye">
-    <!-- Mask for eye content -->
     <mask id="rightEyeMask">
       <ellipse cx="385" cy="220" ry="40" rx="30" fill="white"/>
     </mask>
     
-    <!-- Eye content group with mask -->
     <g mask="url(#rightEyeMask)">
-      <ellipse cx="385" cy="220" ry="40" rx="30" fill="url(#scleraGradient)"/>
+      <ellipse cx="385" cy="220" ry="40" rx="30" fill="url(#enhancedScleraGradient)"/>
       
-      <!-- Eye components group for zoom -->
       <g id="rightEyeComponents">
-        <!-- Iris with enhanced gradient -->
-        <ellipse id="rightIris" cx="385" cy="230" ry="25" rx="20" fill="#39935c">
-          <animate attributeName="ry" values="27;26;27" dur="3s" repeatCount="indefinite"/>
+        <ellipse id="rightIris" cx="385" cy="220" ry="25" rx="20" fill="url(#enhancedIrisGradient)">
+          <animate attributeName="ry" values="25;24;25" dur="3s" repeatCount="indefinite"/>
         </ellipse>
         
-        <!-- Pupil -->
-        <ellipse id="rightPupil" cx="385" cy="230" ry="15" rx="12" fill="#000"/>
+        <ellipse id="rightPupil" cx="385" cy="220" ry="15" rx="12" fill="#000">
+          <animate attributeName="ry" values="15;14;15" dur="3s" repeatCount="indefinite"/>
+        </ellipse>
         
-        <!-- Enhanced eye highlights -->
         <g id="rightHighlights">
-          <!-- Main catchlight -->
-          <ellipse cx="378" cy="220" rx="6" ry="4" fill="#fff" opacity="0.8" transform="rotate(-15)"/>
-          <!-- Secondary highlight -->
-          <ellipse cx="392" cy="215" rx="3" ry="2" fill="#fff" opacity="0.5"/>
-          <!-- Bottom reflection -->
-          <ellipse cx="385" cy="240" rx="8" ry="2" fill="#fff" opacity="0.2"/>
+          <ellipse cx="378" cy="210" rx="6" ry="4" fill="#fff" opacity="0.9" transform="rotate(-15)"/>
+          <ellipse cx="392" cy="205" rx="3" ry="2" fill="#fff" opacity="0.6"/>
+          <ellipse cx="385" cy="230" rx="8" ry="2" fill="#fff" opacity="0.3"/>
+          <circle cx="385" cy="215" r="1" fill="#fff" opacity="0.8"/>
         </g>
       </g>
     </g>
@@ -651,9 +662,16 @@ androidLogoContainer.innerHTML = `
 </svg>
 `;
 
-class AndroidEyesAnimation {
+class EnhancedAndroidEyesAnimation {
     constructor() {
         this.container = androidLogoContainer;
+        this.setupElements();
+        this.setupConfig();
+        this.setupState();
+        this.init();
+    }
+
+    setupElements() {
         this.leftPupil = this.container.querySelector('#leftPupil');
         this.rightPupil = this.container.querySelector('#rightPupil');
         this.leftIris = this.container.querySelector('#leftIris');
@@ -662,63 +680,148 @@ class AndroidEyesAnimation {
         this.rightHighlights = this.container.querySelector('#rightHighlights');
         this.leftEyeComponents = this.container.querySelector('#leftEyeComponents');
         this.rightEyeComponents = this.container.querySelector('#rightEyeComponents');
-        
-        this.config = {
-            maxPupilOffset: 12,
-            blinkInterval: { min: 2000, max: 5000 },
-            surpriseDuration: 800,
-            followSpeed: 0.15,
-            zoomRange: {
-                min: 0.85,  // Maximum zoom out
-                max: 1.15   // Maximum zoom in
-            },
-            maxDistance: 500 // Maximum distance to consider for zoom (in pixels)
-        };
+    }
 
+    setupConfig() {
+        this.config = {
+            maxPupilOffset: 15,
+            blinkInterval: { min: 1500, max: 4000 },
+            surpriseDuration: 1000,
+            followSpeed: 0.12,
+            zoomRange: {
+                min: 0.7,
+                max: 1.3
+            },
+            maxDistance: 600,
+            idleMovementRange: 0.3,
+            cursorIdleTimeout: 30000, // 30 seconds
+            lastMouseMoveTime: Date.now()
+        };
+    }
+
+    setupState() {
         this.state = {
             isBlinking: false,
             isSurprised: false,
+            isSpinning: false,
             lastBlinkTime: Date.now(),
             currentPupilPos: { x: 0, y: 0 },
-            originalPupilScale: 1
+            blinkCount: 0,
+            mouseX: window.innerWidth / 2,
+            mouseY: window.innerHeight / 2
         };
-
-        this.init();
     }
 
     init() {
         this.startBlinking();
         this.addEventListeners();
         this.startIdleMovement();
+        this.startCursorIdleCheck();
+        this.startEyeTracking();
     }
 
     addEventListeners() {
         document.addEventListener('mousemove', (e) => {
-            this.handleMouseMove(e);
-            this.handleZoom(e);
+            if (!this.state.isSpinning) {
+                this.state.mouseX = e.clientX;
+                this.state.mouseY = e.clientY;
+                this.config.lastMouseMoveTime = Date.now();
+                this.handleZoom(e);
+            }
         });
         document.addEventListener('click', this.handleClick.bind(this));
-        document.addEventListener('mouseenter', () => this.blink(true));
+    }
+
+    startEyeTracking() {
+        const trackEyes = () => {
+            if (!this.state.isSpinning) {
+                const rect = this.container.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                // Calculate quadrant-aware angle
+                const dx = this.state.mouseX - centerX;
+                const dy = this.state.mouseY - centerY;
+                const angle = Math.atan2(dy, dx);
+                
+                // Distance calculation with quadrant adjustment
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const normalizedDistance = Math.min(distance, this.config.maxDistance) / this.config.maxDistance;
+                
+                // Quadrant-specific movement intensity
+                const baseIntensity = this.config.maxPupilOffset * normalizedDistance;
+                let moveX = Math.cos(angle) * baseIntensity;
+                let moveY = Math.sin(angle) * baseIntensity;
+
+                // Boundary adjustments
+                const isBottom = dy > rect.height / 3;
+                const isTop = dy < -rect.height / 3;
+                
+                if (isBottom) {
+                    moveY = Math.min(moveY * 1.2, this.config.maxPupilOffset);
+                } else if (isTop) {
+                    moveY = Math.max(moveY * 1.2, -this.config.maxPupilOffset);
+                }
+
+                // Apply quadrant-aware eye movement
+                gsap.to([this.leftPupil, this.leftIris, this.rightPupil, this.rightIris], {
+                    duration: 0.12,
+                    x: moveX,
+                    y: moveY,
+                    ease: "power1.out"
+                });
+
+                // Highlight movement with quadrant adjustment
+                gsap.to([this.leftHighlights, this.rightHighlights], {
+                    duration: 0.12,
+                    x: moveX * -0.2,
+                    y: moveY * -0.2,
+                    ease: "power1.out"
+                });
+
+                // Dynamic pupil scaling
+                const pupilScale = gsap.utils.clamp(
+                    0.8,
+                    1.1,
+                    1 - (normalizedDistance * 0.2)
+                );
+                
+                gsap.to([this.leftPupil, this.rightPupil], {
+                    duration: 0.15,
+                    scale: pupilScale,
+                    transformOrigin: "center center"
+                });
+            }
+            requestAnimationFrame(trackEyes);
+        };
+        trackEyes();
+    }
+
+    startCursorIdleCheck() {
+        setInterval(() => {
+            const now = Date.now();
+            if (now - this.config.lastMouseMoveTime >= this.config.cursorIdleTimeout) {
+                this.triggerHilariousBlink();
+                this.config.lastMouseMoveTime = now; // Reset timer
+            }
+        }, 1000); // Check every second
     }
 
     handleZoom(event) {
         const rect = this.container.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-
-        // Calculate distance from cursor to center of container
+        
         const dx = event.clientX - centerX;
         const dy = event.clientY - centerY;
         const distance = Math.sqrt(dx * dx + dy * dy);
-
-        // Calculate zoom factor based on distance
+        
         const normalizedDistance = Math.min(distance, this.config.maxDistance) / this.config.maxDistance;
         const zoomFactor = this.config.zoomRange.max - 
             (normalizedDistance * (this.config.zoomRange.max - this.config.zoomRange.min));
 
-        // Apply zoom to eye components
         gsap.to([this.leftEyeComponents, this.rightEyeComponents], {
-            duration: 0.5,
+            duration: 0.4,
             scale: zoomFactor,
             transformOrigin: "center center",
             ease: "power2.out"
@@ -726,6 +829,8 @@ class AndroidEyesAnimation {
     }
 
     handleMouseMove(event) {
+        if (this.state.isSpinning) return;
+
         const rect = this.container.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
@@ -743,7 +848,6 @@ class AndroidEyesAnimation {
         const targetX = dx * this.config.maxPupilOffset;
         const targetY = dy * this.config.maxPupilOffset;
 
-        // Move pupils and irises
         gsap.to([this.leftPupil, this.rightPupil, this.leftIris, this.rightIris], {
             duration: 0.3,
             ease: "power2.out",
@@ -751,17 +855,15 @@ class AndroidEyesAnimation {
             y: targetY
         });
 
-        // Move highlights in opposite direction slightly
         gsap.to([this.leftHighlights, this.rightHighlights], {
             duration: 0.3,
             ease: "power2.out",
-            x: targetX * -0.2,
-            y: targetY * -0.2
+            x: targetX * -0.3,
+            y: targetY * -0.3
         });
 
-        // Adjust pupil size based on distance from center
         const distance = Math.sqrt(dx * dx + dy * dy);
-        const pupilScale = Math.max(0.8, 1 - (distance * 0.2));
+        const pupilScale = Math.max(0.7, 1 - (distance * 0.3));
         
         gsap.to([this.leftPupil, this.rightPupil], {
             duration: 0.3,
@@ -771,61 +873,74 @@ class AndroidEyesAnimation {
     }
 
     handleClick() {
-        if (this.state.isSurprised) return;
+        if (this.state.isSpinning || this.state.isSurprised) return;
         
         this.state.isSurprised = true;
-        
+        this.state.isSpinning = true;
+
+        // Funny spin animation
         gsap.timeline()
-            .to([this.leftPupil, this.rightPupil], {
-                duration: 0.1,
-                scale: 1.3,
-                ease: "power2.out"
+            .to([this.leftEyeComponents, this.rightEyeComponents], {
+                duration: 0.8,
+                rotation: 360,
+                transformOrigin: "center center",
+                ease: "power2.inOut"
             })
             .to([this.leftPupil, this.rightPupil], {
-                duration: 0.3,
-                scale: 1,
-                ease: "power2.out",
+                duration: 0.2,
+                scale: 1.5,
+                ease: "bounce.out",
                 onComplete: () => {
                     this.state.isSurprised = false;
+                    this.state.isSpinning = false;
+                    this.triggerHilariousBlink();
+                }
+            });
+    }
+
+    triggerHilariousBlink() {
+        this.state.blinkCount = 0;
+        this.rapidBlink();
+    }
+
+    rapidBlink() {
+        if (this.state.blinkCount >= 3) return;
+        
+        this.state.isBlinking = true;
+        
+        gsap.timeline()
+            .to([this.leftEyeComponents, this.rightEyeComponents], {
+                duration: 0.1,
+                scaleY: 0.1,
+                transformOrigin: "center center",
+                ease: "power1.in"
+            })
+            .to([this.leftEyeComponents, this.rightEyeComponents], {
+                duration: 0.1,
+                scaleY: 1,
+                ease: "power1.out",
+                onComplete: () => {
+                    this.state.isBlinking = false;
+                    this.state.blinkCount++;
+                    if (this.state.blinkCount < 3) {
+                        setTimeout(() => this.rapidBlink(), 150);
+                    }
                 }
             });
     }
 
     startIdleMovement() {
         const makeRandomMovement = () => {
-            if (!this.state.isSurprised) {
-                const randomX = (Math.random() - 0.5) * 0.2;
-                const randomY = (Math.random() - 0.5) * 0.2;
+            if (!this.state.isSurprised && !this.state.isSpinning) {
+                const randomX = (Math.random() - 0.5) * this.config.idleMovementRange;
+                const randomY = (Math.random() - 0.5) * this.config.idleMovementRange;
                 this.moveEyes(randomX, randomY);
             }
             
-            setTimeout(makeRandomMovement, Math.random() * 3000 + 2000);
+            setTimeout(makeRandomMovement, Math.random() * 4000 + 2000);
         };
         
         setTimeout(makeRandomMovement, 2000);
-    }
-
-    blink(immediate = false) {
-        if (this.state.isBlinking) return;
-        
-        this.state.isBlinking = true;
-        const duration = immediate ? 0.15 : 0.2;
-
-        gsap.timeline()
-            .to([this.leftEyelid, this.rightEyelid], {
-                duration: duration / 2,
-                opacity: 1,
-                ease: "power1.in"
-            })
-            .to([this.leftEyelid, this.rightEyelid], {
-                duration: duration / 2,
-                opacity: 0,
-                ease: "power1.out",
-                onComplete: () => {
-                    this.state.isBlinking = false;
-                    this.state.lastBlinkTime = Date.now();
-                }
-            });
     }
 
     startBlinking() {
@@ -836,8 +951,9 @@ class AndroidEyesAnimation {
                 (this.config.blinkInterval.max - this.config.blinkInterval.min) + 
                 this.config.blinkInterval.min;
 
-            if (timeSinceLastBlink > randomInterval && !this.state.isSurprised) {
-                this.blink();
+            if (timeSinceLastBlink > randomInterval && !this.state.isSurprised && !this.state.isSpinning) {
+                this.rapidBlink();
+                this.state.lastBlinkTime = now;
             }
             requestAnimationFrame(checkBlink);
         };
@@ -846,4 +962,5 @@ class AndroidEyesAnimation {
 }
 
 // Initialize the enhanced eyes animation
-const androidEyes = new AndroidEyesAnimation();
+const androidEyes = new EnhancedAndroidEyesAnimation();
+
