@@ -20,15 +20,18 @@ new fullpage('#fullpage', {
 });
 
 function updateTime() {
-    const timeDisplay = document.getElementById('time-display');
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    timeDisplay.textContent = `${hours}:${minutes}`;
+    const timeElements = document.querySelectorAll('.time-display');
+    const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); // 24-hour format
+
+    timeElements.forEach(element => {
+        element.textContent = currentTime;
+    });
 }
 
-// Update the time immediately and then every minute
+// Call updateTime function to update the time
 updateTime();
+
+// Optionally, you can set an interval to update the time every minute
 setInterval(updateTime, 60000);
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -228,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(introSubtitle, { scale: 1, color: '#ddd', duration: 0.5 });
     });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     const images = ['D:/z_material/web/portfolio-andde-web/img/spacerr__app.png', 'img2.png', 'img3.png']; // Add your image paths here
     let currentIndex = 0;
@@ -266,99 +270,85 @@ document.addEventListener('DOMContentLoaded', () => {
     const experienceData = {
         sspl: {
             title: 'SSPL - DRDO',
-            description: 'Developed commercial Android apps for SEO-related projects, implemented modern Android architecture patterns.',
-            image: '/api/placeholder/280/200', // Replace with actual image path
-            tech: ['Kotlin', 'Jetpack Compose', 'MVVM']
+            description: 'Worked on an Android app using Kotlin and XML, assisting the elderly and disabled by connecting to a haptic hardware device.',
+            image: 'img/sspll.png', // Replace with actual image path
+            tech: ['Kotlin', 'XML', 'Biometric Authentication']
         },
         aivirex: {
             title: 'AiVirex Innovations LLP',
-            description: 'Created high-performing mobile apps using modern Android development practices.',
-            image: '/api/placeholder/280/200', // Replace with actual image path
-            tech: ['Kotlin', 'Clean Architecture', 'Firebase']
+            description: 'Contributed to Attendify app using Clean Architecture and Jetpack Compose, adding user features that boosted engagement by 35%.',
+            image: 'img/attendify.png', // Replace with actual image path
+            tech: ['Kotlin', 'Jetpack Compose', 'MVVM']
         },
         radionics: {
             title: 'Radionics Technology',
-            description: 'Led development of core Android applications with focus on performance optimization.',
-            image: '/api/placeholder/280/200', // Replace with actual image path
-            tech: ['Android', 'Java', 'Real-time Sync']
+            description: 'Enhanced AstroPeoples app by optimizing Kotlin code and UI, and integrated Razorpay and SignalR for payments and chat.',
+            image: 'img/astropeap.png', // Replace with actual image path
+            tech: ['Kotlin', 'Hilt', 'Retrofit', 'UI Optimization']
         }
     };
 
     // Education section data
-    const educationData = {
-        btech: {
-            title: 'B.Tech in Computer Science',
-            description: 'Specialized in Computer Science with focus on Mobile Application Development.',
-            image: '/api/placeholder/280/200', // Replace with actual image path
-            achievements: ['Dean\'s List', 'Research Project']
-        },
-        internship: {
-            title: 'DRDO Internship',
-            description: 'Android Development Internship focusing on secure communication applications.',
-            image: '/api/placeholder/280/200', // Replace with actual image path
-            achievements: ['Security Certification', 'Project Excellence']
-        }
-    };
+        const educationData = {
+            btech: {
+                title: 'Guru Gobind Singh Indraprastha University',
+                description: 'Bachelors in Technology - Computer Science Engineering',
+                image: 'img/ggsipu%20imgae.png', // Replace with actual image path
+                achievements: ['CGPA: 9.1', 'Class of 2025']
+            },
+            school: {
+                title: 'Mount Olivet Senior Secondary School',
+                description: '12th Grade - Science, CBSE\n10th Grade - CBSE',
+                image: 'img/schoolimage.png', // Replace with actual image path
+                achievements: ['10th: 86.6%', '12th: 83%']
+            }
+        };
 
     // Handle experience timeline interactions
     const experienceItems = document.querySelectorAll('.timeline-item[data-company]');
     experienceItems.forEach(item => {
         item.addEventListener('click', () => {
-            // Update active state
             document.querySelectorAll('.timeline-item[data-company]').forEach(i => i.classList.remove('active'));
             item.classList.add('active');
 
-            // Update preview
             const company = item.dataset.company;
             const data = experienceData[company];
-            
             const preview = document.getElementById('experience-preview');
             preview.classList.remove('fade-in');
-            void preview.offsetWidth; // Trigger reflow
+            void preview.offsetWidth;
             preview.classList.add('fade-in');
 
             document.getElementById('experience-image').src = data.image;
             document.getElementById('preview-title').textContent = data.title;
             document.getElementById('preview-description').textContent = data.description;
 
-            // Update tech stack
             const techStack = preview.querySelector('.tech-stack');
-            techStack.innerHTML = data.tech.map(tech => 
-                `<span class="tech-badge">${tech}</span>`
-            ).join('');
+            techStack.innerHTML = data.tech.map(tech => `<span class="tech-badge">${tech}</span>`).join('');
         });
     });
 
-    // Handle education timeline interactions
     const educationItems = document.querySelectorAll('.timeline-item[data-education]');
     educationItems.forEach(item => {
         item.addEventListener('click', () => {
-            // Update active state
             document.querySelectorAll('.timeline-item[data-education]').forEach(i => i.classList.remove('active'));
             item.classList.add('active');
 
-            // Update preview
             const education = item.dataset.education;
             const data = educationData[education];
-            
             const preview = document.getElementById('education-preview');
             preview.classList.remove('fade-in');
-            void preview.offsetWidth; // Trigger reflow
+            void preview.offsetWidth;
             preview.classList.add('fade-in');
 
             document.getElementById('education-image').src = data.image;
             document.getElementById('edu-preview-title').textContent = data.title;
             document.getElementById('edu-preview-description').textContent = data.description;
 
-            // Update achievement badges
             const achievementBadges = preview.querySelector('.achievement-badges');
-            achievementBadges.innerHTML = data.achievements.map(achievement => 
-                `<span class="achievement-badge">${achievement}</span>`
-            ).join('');
+            achievementBadges.innerHTML = data.achievements.map(achievement => `<span class="achievement-badge">${achievement}</span>`).join('');
         });
     });
 
-    // Initialize first items as active
     document.querySelector('.timeline-item[data-company]').click();
     document.querySelector('.timeline-item[data-education]').click();
 });

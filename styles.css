@@ -158,11 +158,18 @@ p {
 }
 
 .profile-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    width: 150px; /* Set width to 200px */
+    height: 150px; /* Set height to 200px */
+    border-radius: 20px; /* Rounded borders */
     margin: 0 auto 1rem;
     background: #e9ecef;
+}
+
+.profile-image img {
+    width: 100%; /* Ensure the image fits the container */
+    height: 100%; /* Ensure the image fits the container */
+    border-radius: 20px; /* Match the container's rounded borders */
+    object-fit: cover;
 }
 
 /* Quick Stats */
@@ -181,11 +188,16 @@ p {
 }
 
 .stat span {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #64ffda;
     font-weight: bold;
 } 
-
+.stat p {
+    font-size: 1rem;
+    color: #000000;
+    font-weight: bold;
+    align-content: center;
+} 
 /* Timeline */
 /* General Reset */
 body {
@@ -535,7 +547,7 @@ body {
 
 .tech-badge {
     background: #112240;
-    color: #64ffda;
+    color: #216e5c;
     padding: 0.4rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -858,9 +870,23 @@ body {
     object-fit: cover;
     transition: all 0.3s ease;
 }
-
+.section-preview-image img {
+    width: 72px;
+    height: 72px;
+    object-fit:contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .preview-description {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.edu-preview-description {
+    font-size: 0.85rem;
+    margin-top: 1rem;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -879,7 +905,7 @@ body {
 
 .tech-badge, .achievement-badge {
     background: rgba(100, 255, 218, 0.1);
-    color: #64ffda;
+    color: #216e5c;
     padding: 5px 12px;
     border-radius: 15px;
     font-size: 0.8em;
@@ -901,3 +927,59 @@ body {
     }
 }
 
+.achievements-grid {
+    display: flex;
+    flex-direction: column; /* Change to column for vertical layout */
+    gap: 10px;
+    align-items: center; /* Center the cards horizontally */
+}
+
+.achievement-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    transition: box-shadow 0.3s ease-in-out;
+    width: 100%; /* Ensure the cards take full width */
+    max-width: 400px; /* Optional: limit the maximum width */
+}
+
+.achievement-card:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.7); /* Green glowing effect */
+}
+
+.achievement-icon {
+    font-size: 36px;
+    margin-bottom: 6px;
+}
+.achievements-showcase {
+    padding: 20px;
+    /* background-color: #f0f0f0; */
+}
+
+.achievement-content {
+    background-color: rgba(20, 20, 30, 0.85);
+    border: 1px solid rgba(0, 180, 150, 0.5);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 255, 190, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.achievement-content h3 {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.achievement-content p {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+}
+.achievement-content:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 8px 20px rgba(0, 255, 190, 0.4), 0 0 30px rgba(0, 180, 150, 0.7);
+}
