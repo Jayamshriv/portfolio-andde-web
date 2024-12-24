@@ -230,8 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', () => {
     // Experience section data
     const experienceData = {
-        clickretina: {
-            title: 'ClickRetina.com',
+        sspl: {
+            title: 'SSPL - DRDO',
             description: 'Developed commercial Android apps for SEO-related projects, implemented modern Android architecture patterns.',
             image: '/api/placeholder/280/200', // Replace with actual image path
             tech: ['Kotlin', 'Jetpack Compose', 'MVVM']
@@ -464,4 +464,163 @@ class Slideshow {
 // Initialize slideshow when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new Slideshow();
+});
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize fullPage.js
+    new fullpage('#fullpage', {
+        autoScrolling: true,
+        scrollOverflow: true,
+        scrollingSpeed: 1000,
+        onLeave: (origin, destination) => {
+            const section = destination.item;
+            if (section.querySelector('.content') && section.querySelector('.device-wrapper')) {
+                animateSection(section, destination.index);
+            }
+        }
+    });
+
+    // Section Animation Function
+    function animateSection(section, sectionIndex) {
+        const content = section.querySelector('.content');
+        const device = section.querySelector('.device-wrapper');
+        const isEven = sectionIndex % 2 === 0;
+
+        // Content and Device Animation
+        if (content && device) {
+            gsap.fromTo(content,
+                { x: isEven ? -100 : 100, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1, ease: 'power2.out' }
+            );
+
+            gsap.fromTo(device,
+                { x: isEven ? 100 : -100, opacity: 0, rotateY: isEven ? 45 : -45 },
+                { x: 0, opacity: 1, rotateY: 0, duration: 1, ease: 'power2.out' }
+            );
+        }
+    }
+
+    // Device Tilt on Mouse Movement
+    document.querySelectorAll('.device').forEach(device => {
+        device.addEventListener('mousemove', (e) => {
+            const rect = device.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            gsap.to(device, {
+                rotateX: (y - centerY) / 20,
+                rotateY: -(x - centerX) / 20,
+                duration: 0.3
+            });
+        });
+        device.addEventListener('mouseleave', () => {
+            gsap.to(device, { rotateX: 0, rotateY: 0, duration: 0.3 });
+        });
+    });
+
+    // Timeline Interaction with Flip Animation
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach(item => {
+        item.addEventListener('click', () => {
+            timelineItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+
+            const relatedDevice = document.querySelector(`#${item.dataset.target}`);
+            if (relatedDevice) {
+                gsap.to(relatedDevice, {
+                    rotateX: 360,
+                    duration: 1,
+                    onComplete: () => {
+                        relatedDevice.textContent = `Data for ${item.dataset.target}`;
+                    }
+                });
+            }
+        });
+    });
+});
+
+const androidLogoContainer = document.createElement('div');
+androidLogoContainer.style.position = 'fixed';
+androidLogoContainer.style.top = '20px';
+androidLogoContainer.style.right = '20px';
+androidLogoContainer.style.width = '200px';
+androidLogoContainer.style.height = '200px';
+androidLogoContainer.style.zIndex = '9999'; // Ensure it's on top of everything
+androidLogoContainer.style.pointerEvents = 'none'; // Prevent interaction
+androidLogoContainer.style.display = 'flex';
+androidLogoContainer.style.alignItems = 'center';
+androidLogoContainer.style.justifyContent = 'center';
+document.body.appendChild(androidLogoContainer);
+
+// Insert the Android SVG logo
+androidLogoContainer.innerHTML = `
+<svg height="600" width="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" transform="translate(-30, 50)">
+  <!-- Android head -->
+  <g transform="translate(-130 ,-500) scale(2)" >
+    <path d="m263.837 306.59 21.9331-37.9944c1.2377-2.12998.48933-4.83565-1.61189-6.07335-2.1012-1.23768-4.83565-.5181-6.04456 1.61189l-22.221 38.4837c-16.9536-7.74281-36.0371-12.0604-56.5599-12.0604-20.5227 0-39.6063 4.31754-56.5599 12.0604l-22.221-38.4837c-1.2377-2.12999-3.94336-2.84957-6.07335-1.61189-2.13 1.2377-2.84959 3.94337-1.61189 6.07335l21.9331 37.9944c-37.8217 20.494-63.4392 58.7762-67.6703 103.592h264.407c-4.2312-44.8161-29.8487-83.0984-67.6991-103.592zm-125.209 66.4614c-6.13092 0-11.0817-4.97957-11.0817-11.0817 0-6.13093 4.97957-11.0817 11.0817-11.0817 6.13092 0 11.0817 4.97956 11.0817 11.0817.0289 6.10212-4.95079 11.0817-11.0817 11.0817zm121.381 0c-6.13091 0-11.0817-4.97957-11.0817-11.0817 0-6.13093 4.97958-11.0817 11.0817-11.0817 6.13093 0 11.0817 4.97956 11.0817 11.0817.0288 6.10212-4.95077 11.0817-11.0817 11.0817z"
+    fill="#32de84" stroke-width=".288"/>
+  </g>
+  <!-- Left Eye -->
+<g id="leftEye">
+  <ellipse cx="155" cy="220" ry="40" rx="30" fill="#fff"></ellipse> <!-- White Sclera -->
+  <ellipse cx="155" cy="230" ry="22" rx="15" fill="#000"></ellipse> <!-- Pupil -->
+</g>
+<!-- Right Eye -->
+<g id="rightEye">
+  <ellipse cx="385" cy="220" ry="40" rx="30" fill="#fff"></ellipse> <!-- White Sclera -->
+  <ellipse cx="385" cy="230" ry="22" rx="15" fill="#000"></ellipse> <!-- Pupil -->
+</g>
+
+</svg>
+`;
+
+
+// References to the eye pupil elements (now <ellipse>)
+const leftPupil = androidLogoContainer.querySelector('#leftEye ellipse:nth-child(2)');
+const rightPupil = androidLogoContainer.querySelector('#rightEye ellipse:nth-child(2)');
+
+// Eye movement logic
+document.addEventListener('mousemove', (event) => {
+  // Get center coordinates of the eyes
+  const containerRect = androidLogoContainer.getBoundingClientRect();
+  const logoCenterX = containerRect.left + containerRect.width / 2;
+  const logoCenterY = containerRect.top + containerRect.height / 2;
+
+  // Eye centers
+  const leftEyeCenterX = logoCenterX - 100; // Adjusted based on svg
+  const rightEyeCenterX = logoCenterX + 100;
+  const eyesCenterY = logoCenterY - 30;
+
+  // Sclera dimensions
+  const scleraRX = 30; // Horizontal radius
+  const scleraRY = 40; // Vertical radius
+
+  // Pupil movement limit (constrained to sclera)
+  const maxOffsetX = scleraRX - 15; // Leave padding to keep within sclera
+  const maxOffsetY = scleraRY - 15;
+
+  // Calculate new position for the pupil
+  function calculatePupilOffset(centerX, centerY) {
+    const dx = event.clientX - centerX;
+    const dy = event.clientY - centerY;
+
+    // Get angle and restrict movement within the boundary
+    const angle = Math.atan2(dy, dx);
+    const distance = Math.min(Math.sqrt(dx ** 2 + dy ** 2), maxOffsetX);
+    const offsetX = Math.min(maxOffsetX, distance * Math.cos(angle));
+    const offsetY = Math.min(maxOffsetY, distance * Math.sin(angle));
+
+    return { offsetX, offsetY };
+  }
+
+  // Calculate offsets for both eyes
+  const leftOffset = calculatePupilOffset(leftEyeCenterX, eyesCenterY);
+  const rightOffset = calculatePupilOffset(rightEyeCenterX, eyesCenterY);
+
+  // Apply constrained movements to the pupils
+  leftPupil.setAttribute('cx', 155 + leftOffset.offsetX);
+  leftPupil.setAttribute('cy', 230 + leftOffset.offsetY);
+  rightPupil.setAttribute('cx', 385 + rightOffset.offsetX);
+  rightPupil.setAttribute('cy', 230 + rightOffset.offsetY);
+
 });
