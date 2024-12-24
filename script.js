@@ -19,6 +19,18 @@ new fullpage('#fullpage', {
     }
 });
 
+function updateTime() {
+    const timeDisplay = document.getElementById('time-display');
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    timeDisplay.textContent = `${hours}:${minutes}`;
+}
+
+// Update the time immediately and then every minute
+updateTime();
+setInterval(updateTime, 60000);
+
 function animateSection(section, sectionIndex) {
     const content = section.querySelector('.content');
     const device = section.querySelector('.device-wrapper');
