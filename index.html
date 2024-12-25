@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -28,9 +29,15 @@
     <div class="scroll-indicator">↓ Scroll to explore</div>
     <div class="glowing-circles">
         <div class="intro-slideshow">
-            <img src="img/spacerr__app.png" alt="Project 1">
-            <img src="img/spacerr__app.png" alt="Project 1">
-            <img src="img/spacerr__app.png" alt="Project 1">
+            <img src="img/spacerr__app.png" alt="Spacerr App">
+            <img src="img/project_img/ic_launcher-playstore.png" alt="safety">
+            <img src="img/project_img/notevaultpurplelogo.png" alt="Project 1">
+            <img src="img/project_img/icon.png" alt="Project 1">
+            <img src="img/attendify.png" alt="Project 1">
+            <img src="img/project_img/track_io_app.png" alt="Project 1">
+            <img src="img/astropeap.png" alt="Project 1">
+            <img src="img/project_img/logo.jpeg" alt="Project 1">
+            <img src="img/project_img/meeraenterprises.jpeg" alt="Project 1">
         </div>
     </div>
 </div>
@@ -41,11 +48,15 @@
                 <div class="content left">
                     <h1>Hi, I'm Jayam</h1>
                     <p>A passionate Android Developer specializing in Kotlin, Jetpack Compose, and Clean Architecture. Developing high-performance Android apps with modern technologies.</p>
-                    <div class="social-links">
-                        <a href="mailto:jayamshrivastav1@gmail.com" class="social-link" target="blank">📧 Email</a>
-                        <a href="https://www.linkedin.com/in/jayamshrivastav-dev/" class="social-link" target="blank">LinkedIn</a>
-                        <a href="https://github.com/Jayamshriv" class="social-link" target="blank">GitHub</a>
+                    <div class="social-links"> 
+                        <a href="mailto:jayamshrivastav1@gmail.com" class="social-link" target="_blank">📧 Email</a>
+                        <a href="https://www.linkedin.com/in/jayamshrivastav-dev/" class="social-link" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/Jayamshriv" class="social-link" target="_blank">GitHub</a>
+                        <a href="https://drive.google.com/file/d/14bZT9dJZo7HWwmb_tevxgk1zm9Ka6KbN/view?usp=sharing" 
+                           class="social-link resume" 
+                           target="_blank">Download Resume</a>
                     </div>
+                    
                 </div>
                 <div class="device-wrapper">
                     <div class="device">
@@ -179,7 +190,7 @@
                                             <h4 id="edu-preview-title">Guru Gobind Singh Indraprastha University</h4>
                                             <div id="edu-preview-description" class="edu-preview-description">B.Tech in Computer Science Engineering with focus on Software Development and Mobile Applications.</div>                                            <div class="achievement-badges">
                                                 <span class="achievement-badge">CGPA: 9.1</span>
-                                                <span class="achievement-badge">Class of 2025</span>
+                                                <span class="achievement-badge">Batch of 2025</span>
                                             </div>
                                         </div>
                                     </div>
@@ -210,6 +221,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 
@@ -217,6 +229,24 @@
         <!-- Achievements Section -->
         <div class="section">
             <div class="content-wrapper">
+                <div class="content right">
+                    <h1>Achievements</h1>
+                    <div class="achievements-showcase">
+                        <div class="achievement-content">
+                            <h3>Leadership Roles</h3>
+                            <p>Vice-President of Robogyan - Robotics Society</p>
+                        </div>
+                        <div class="achievement-content">
+                            <h3>Smart India Hackathon 2024</h3>
+                            <p>Finalist in the national-level hackathon</p>
+                        </div>
+                        <div class="achievement-content">
+                            <h3>TECHKRITI-2024 IIT Kanpur</h3>
+                            <p>Led the team to first prize</p>
+                        </div>
+                        
+                    </div>
+                </div>
                 <div class="device-wrapper">
                     <div class="device">
                         <div class="screen">
@@ -251,66 +281,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="content right">
-                    <h1>Achievements</h1>
-                    <div class="achievements-showcase">
-                        <div class="achievement-content">
-                            <h3>Leadership Roles</h3>
-                            <p>Vice-President of Robogyan - Robotics Society</p>
-                        </div>
-                        <div class="achievement-content">
-                            <h3>Smart India Hackathon 2024</h3>
-                            <p>Finalist in the national-level hackathon</p>
-                        </div>
-                        <div class="achievement-content">
-                            <h3>TECHKRITI-2024 IIT Kanpur</h3>
-                            <p>Led the team to first prize</p>
-                        </div>
-                        
-                    </div>
-                </div>
+                
             </div>
         </div>
 
         <!-- Projects Section -->
         <div class="section">
-            <div class="content-wrapper">
-                <div class="device-wrapper">
-                    <div class="device">
-                        <div class="screen">
-                            <div class="status-bar">
-                                <h6 class="time-display">12:30</h6>
-                                <div class="status-icons"></div>
-                            </div>
-                            <div class="notch"></div>
-                            <div class="app-screen">
-                                <div class="app-header">Projects</div>
-                                <div class="app-content">
-                                    <div class="project-grid">
-                                        <div class="project-card" data-project="spacerr">
-                                            <div class="project-image"></div>
-                                            <h4>Spacerr</h4>
-                                            <h5>Space Exploration App</h5>
-                                        </div>
-                                        <div class="project-card" data-project="safety">
-                                            <div class="project-image">
-                                                <img src="img/spacerr__app.png" alt="Safety App" height="40">
-                                            </div>
-                                            <h4>Safety App</h4>
-                                            <h5>Real-time Location Sharing</h5>
-                                        </div>
-                                    </div>
-                                    <div class="slideshow-container hidden">
-                                        <button class="close-slideshow">×</button>
-                                        <button class="nav-btn prev">❮</button>
-                                        <button class="nav-btn next">❯</button>
-                                        <div class="slides"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="content-wrapper">                
                 <div class="content right">
                     <h1>Projects</h1>
                     <div class="project-showcase">
@@ -323,6 +300,10 @@
                                     <li>Firebase Cloud Messaging, Google Maps API integration</li>
                                 </ul>
                             </div>
+                            <div class="github-link">
+                                <span>View on </span>
+                                <a href="https://github.com/Jayamshriv/Spacerr" target="_blank">GitHub →</a>
+                            </div>
                         </div>
                         <div class="project-content">
                             <h3>Safety App</h3>
@@ -333,6 +314,50 @@
                                     <li>Real-time location sharing with trusted contacts</li>
                                 </ul>
                             </div>
+                            <div class="github-link">
+                                    <span>View on </span>
+                                <a href="https://github.com/Jayamshriv/Safety" target="_blank">GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="device-wrapper">
+                    <div class="device">
+                        <div class="screen">
+                            <div class="status-bar">
+                                <h6 class="time-display">12:30</h6>
+                                <div class="status-icons"></div>
+                            </div>
+                            <div class="notch"></div>
+                            <div class="app-screen">
+                                <div class="app-header">Projects</div>
+                                <div class="app-content">
+                                    <div class="project-grid">
+                                        <div class="project-card" >
+                                            <div class="project-image">
+                                                <img src="img/spacerr__app.png" alt="Safety App" height="40">
+                                            </div>
+                                            <h4>Spacerr</h4>
+                                            <h5>Space Exploration App</h5>
+                                            <!-- <div class="github-link">
+                                                <span>View on </span>
+                                                <a href="https://github.com/yourusername/spacerr" target="_blank">GitHub →</a>
+                                            </div> -->
+                                        </div>
+                                        <div class="project-card" >
+                                            <div class="project-image">
+                                                <img src="img/project_img/ic_launcher-playstore.png" alt="Safety App" height="40">
+                                            </div>
+                                            <h4>Safety App</h4>
+                                            <h5>Real-time Location Sharing</h5>
+                                            <!-- <div class="github-link">
+                                                <span>View on </span>
+                                                <a href="https://github.com/yourusername/spacerr" target="_blank">GitHub →</a>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -342,20 +367,53 @@
         <!-- Contact Section -->
         <div class="section">
             <div class="content-wrapper">
+                <div class="device-wrapper">
+                    <div class="device">
+                        <div class="screen">
+                            <div class="status-bar">
+                                <h6>12:30</h6>
+                                <div class="status-icons"></div>
+                            </div>
+                            <div class="notch"></div>
+                            <div class="app-screen">
+                                <div class="app-header">Let's Connect</div>
+                                <div class="app-content">
+                                    <div class="contact-card">
+                                        <div class="contact-profile-image">
+                                            <img src="img/letsconnect.png"alt="contact-image"/>
+                                        </div>
+                                        <!-- <h3>Let's Connect!</h3> -->
+                                        <form id="contact-form">
+                                            <input type="name" id="name" name="name" placeholder="Your Name" required>
+                                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                                            <textarea id="body" name="body" placeholder="Message" required></textarea>
+                                            <button type="submit">Send</button>
+                                        </form>
+                                        <div id="confirmation-message" style="display:none;">Thanks for connecting !!!😊</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="content left">
                     <h1>Get in Touch</h1>
                     <div class="contact-info">
                         <p>Feel free to reach out for collaborations or opportunities!</p>
                         <div class="contact-details">
                             <div class="contact-item">
-                                <span class="icon">📧</span>
-                                <a href="mailto:your.email@example.com">your.email@example.com</a>
+                                <div class="small-contact-image-in">
+                                    <img src="img/email.png" alt="LinkedIn" class="icon" />
+                                </div>
+                                <a href="mailto:jayamshrivastav1@gmail.com" style="color: white; text-decoration: none;">jayamshrivastav1@gmail.com</a>
                             </div>
                             <div class="contact-item">
-                                <img src="img/linkedin.png" alt="LinkedIn" class="icon" />
-                                
+                                <div class="small-contact-image-in">
+                                    <img src="img/linkedinimagee.png" alt="LinkedIn" class="icon" />
+                                </div>
+                                <a href="https://www.linkedin.com/in/jayamshrivastav-dev/" style="color: white; text-decoration: none;">Jayam Shrivastav Linkedin Profile</a>
                             </div>
-                            
                             <div class="contact-item">
                                 <span class="icon">📍</span>
                                 <p>New Delhi, India</p>
@@ -363,34 +421,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="device-wrapper">
-                    <div class="device">
-                        <div class="screen">
-                            <div class="status-bar">
-                                <h6>12:30</h6>
-                                <div class="status-icons">
-                                    <!-- <span class="wifi">📶</span>
-                                    <span class="battery">🔋</span> -->
-                                </div>
-                            </div>
-                            <div class="notch"></div>
-                            <div class="app-screen">
-                                <div class="app-header">Contact</div>
-                                <div class="app-content">
-                                    <div class="contact-card">
-                                        <div class="profile-image"></div>
-                                        <h3>Let's Connect!</h3>
-                                        <div class="contact-buttons">
-                                            <button class="contact-btn email">Email</button>
-                                            <button class="contact-btn linkedin">LinkedIn</button>
-                                            <button class="contact-btn github">GitHub</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

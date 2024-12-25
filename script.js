@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Guru Gobind Singh Indraprastha University',
                 description: 'Bachelors in Technology - Computer Science Engineering',
                 image: 'img/ggsipu%20imgae.png', // Replace with actual image path
-                achievements: ['CGPA: 9.1', 'Class of 2025']
+                achievements: ['CGPA: 9.1', 'Passout Batach: 2025']
             },
             school: {
                 title: 'Mount Olivet Senior Secondary School',
@@ -353,136 +353,146 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.timeline-item[data-education]').click();
 });
 
-// Project image data
-const projectImages = {
-    safety: [
-        'https://via.placeholder.com/500/FF0000',
-        'https://via.placeholder.com/500/00FF00',
-        'https://via.placeholder.com/500/0000FF',
-    ],
-    spacerr: [
-        'https://via.placeholder.com/500/FFFF00',
-        'https://via.placeholder.com/500/FF00FF',
-        'https://via.placeholder.com/500/00FFFF',
-    ],
-};
-
-class Slideshow {
-    constructor() {
-        this.slideshowContainer = document.querySelector('.slideshow-container');
-        this.slidesContainer = document.querySelector('.slides');
-        this.currentIndex = 0;
-        this.slides = [];
-        this.slideInterval = null;
-        this.projectCards = document.querySelectorAll('.project-card');
-
-        if (this.slideshowContainer && this.slidesContainer && this.projectCards.length) {
-            this.initializeEventListeners();
-        } else {
-            console.error('Required DOM elements for the slideshow are missing.');
+// // Project image data
+// Select all project cards
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const url = this.getAttribute('data-url');
+        if (url) {
+            window.open(url, '_blank');
         }
-    }
-
-    initializeEventListeners() {
-        // Project card click handlers
-        this.projectCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const project = card.dataset.project;
-                if (projectImages[project]) {
-                    this.loadProject(project);
-                } else {
-                    console.error(`No images found for project: ${project}`);
-                }
-            });
-        });
-
-        // Navigation button handlers
-        document.querySelector('.prev').addEventListener('click', () => this.navigate(-1));
-        document.querySelector('.next').addEventListener('click', () => this.navigate(1));
-        document.querySelector('.close-slideshow').addEventListener('click', () => this.close());
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (this.slideshowContainer.classList.contains('hidden')) return;
-
-            switch (e.key) {
-                case 'ArrowLeft':
-                    this.navigate(-1);
-                    break;
-                case 'ArrowRight':
-                    this.navigate(1);
-                    break;
-                case 'Escape':
-                    this.close();
-                    break;
-            }
-        });
-    }
-
-    loadProject(project) {
-        this.currentIndex = 0;
-        this.slidesContainer.innerHTML = '';
-        this.slides = [];
-
-        // Create slides
-        projectImages[project].forEach((src, index) => {
-            const slide = document.createElement('div');
-            slide.className = `slide ${index === 0 ? 'active' : ''}`;
-
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = `${project} screenshot ${index + 1}`;
-
-            slide.appendChild(img);
-            this.slidesContainer.appendChild(slide);
-            this.slides.push(slide);
-        });
-
-        // Show slideshow
-        this.slideshowContainer.classList.remove('hidden');
-
-        // Start auto-advance
-        this.startAutoAdvance();
-    }
-
-    navigate(direction) {
-        if (!this.slides.length) return;
-
-        // Remove active class from current slide
-        this.slides[this.currentIndex].classList.remove('active');
-
-        // Calculate new index
-        this.currentIndex = (this.currentIndex + direction + this.slides.length) % this.slides.length;
-
-        // Add active class to new slide
-        this.slides[this.currentIndex].classList.add('active');
-
-        // Reset auto-advance timer
-        this.startAutoAdvance();
-    }
-
-    startAutoAdvance() {
-        if (this.slideInterval) {
-            clearInterval(this.slideInterval);
-        }
-        this.slideInterval = setInterval(() => {
-            this.navigate(1);
-        }, 3000);
-    }
-
-    close() {
-        this.slideshowContainer.classList.add('hidden');
-        if (this.slideInterval) {
-            clearInterval(this.slideInterval);
-            this.slideInterval = null;
-        }
-    }
-}
-
-// Initialize slideshow when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new Slideshow();
+    });
 });
+
+// const projectImages = {
+//     safety: [
+//         'https://via.placeholder.com/500/FF0000',
+//         'https://via.placeholder.com/500/00FF00',
+//         'https://via.placeholder.com/500/0000FF',
+//     ],
+//     spacerr: [
+//         'https://via.placeholder.com/500/FFFF00',
+//         'https://via.placeholder.com/500/FF00FF',
+//         'https://via.placeholder.com/500/00FFFF',
+//     ],
+// };
+
+// class Slideshow {
+//     constructor() {
+//         this.slideshowContainer = document.querySelector('.slideshow-container');
+//         this.slidesContainer = document.querySelector('.slides');
+//         this.currentIndex = 0;
+//         this.slides = [];
+//         this.slideInterval = null;
+//         this.projectCards = document.querySelectorAll('.project-card');
+
+//         if (this.slideshowContainer && this.slidesContainer && this.projectCards.length) {
+//             this.initializeEventListeners();
+//         } else {
+//             console.error('Required DOM elements for the slideshow are missing.');
+//         }
+//     }
+
+//     initializeEventListeners() {
+//         // Project card click handlers
+//         this.projectCards.forEach(card => {
+//             card.addEventListener('click', () => {
+//                 const project = card.dataset.project;
+//                 if (projectImages[project]) {
+//                     this.loadProject(project);
+//                 } else {
+//                     console.error(`No images found for project: ${project}`);
+//                 }
+//             });
+//         });
+
+//         // Navigation button handlers
+//         document.querySelector('.prev').addEventListener('click', () => this.navigate(-1));
+//         document.querySelector('.next').addEventListener('click', () => this.navigate(1));
+//         document.querySelector('.close-slideshow').addEventListener('click', () => this.close());
+
+//         // Keyboard navigation
+//         document.addEventListener('keydown', (e) => {
+//             if (this.slideshowContainer.classList.contains('hidden')) return;
+
+//             switch (e.key) {
+//                 case 'ArrowLeft':
+//                     this.navigate(-1);
+//                     break;
+//                 case 'ArrowRight':
+//                     this.navigate(1);
+//                     break;
+//                 case 'Escape':
+//                     this.close();
+//                     break;
+//             }
+//         });
+//     }
+
+//     loadProject(project) {
+//         this.currentIndex = 0;
+//         this.slidesContainer.innerHTML = '';
+//         this.slides = [];
+
+//         // Create slides
+//         projectImages[project].forEach((src, index) => {
+//             const slide = document.createElement('div');
+//             slide.className = `slide ${index === 0 ? 'active' : ''}`;
+
+//             const img = document.createElement('img');
+//             img.src = src;
+//             img.alt = `${project} screenshot ${index + 1}`;
+
+//             slide.appendChild(img);
+//             this.slidesContainer.appendChild(slide);
+//             this.slides.push(slide);
+//         });
+
+//         // Show slideshow
+//         this.slideshowContainer.classList.remove('hidden');
+
+//         // Start auto-advance
+//         this.startAutoAdvance();
+//     }
+
+//     navigate(direction) {
+//         if (!this.slides.length) return;
+
+//         // Remove active class from current slide
+//         this.slides[this.currentIndex].classList.remove('active');
+
+//         // Calculate new index
+//         this.currentIndex = (this.currentIndex + direction + this.slides.length) % this.slides.length;
+
+//         // Add active class to new slide
+//         this.slides[this.currentIndex].classList.add('active');
+
+//         // Reset auto-advance timer
+//         this.startAutoAdvance();
+//     }
+
+//     startAutoAdvance() {
+//         if (this.slideInterval) {
+//             clearInterval(this.slideInterval);
+//         }
+//         this.slideInterval = setInterval(() => {
+//             this.navigate(1);
+//         }, 3000);
+//     }
+
+//     close() {
+//         this.slideshowContainer.classList.add('hidden');
+//         if (this.slideInterval) {
+//             clearInterval(this.slideInterval);
+//             this.slideInterval = null;
+//         }
+//     }
+// }
+
+// // Initialize slideshow when DOM is loaded
+// document.addEventListener('DOMContentLoaded', () => {
+//     new Slideshow();
+// });
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize fullPage.js
@@ -954,3 +964,42 @@ class EnhancedAndroidEyesAnimation {
 // Initialize the enhanced eyes animation
 const androidEyes = new EnhancedAndroidEyesAnimation();
 
+
+// Initialize EmailJS with your User ID
+emailjs.init("pix-hlGvx0mZtmiOq"); // Replace with your User ID
+
+// Add an event listener to the contact form's submit event
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Retrieve form data
+    const fromName = document.getElementById('name').value;  // Name field in the form
+    const fromEmail = document.getElementById('email').value; // Email field in the form
+    const subject = document.getElementById('subject').value; // Optional, for Subject field
+    const message = document.getElementById('body').value;   // Message field in the form
+
+    // Validate form fields
+    if (!fromName || !fromEmail || !message) {
+        alert("Please fill in all the required fields.");
+        return;
+    }
+
+    // Send email via EmailJS
+    emailjs.send("service_berm399", "template_qrbg4le", {
+        from_name: fromName,
+        from_email: fromEmail,
+        message: message,
+        to_name: "Administrator" // Change to your desired name or title
+    }).then(
+        () => {
+            // Display confirmation and reset form
+            document.getElementById('confirmation-message').style.display = 'block';
+            document.getElementById('contact-form').reset();
+        },
+        (error) => {
+            // Handle errors
+            console.error('Error:', error);
+            alert('Failed to send message. Please try again later.');
+        }
+    );
+});
