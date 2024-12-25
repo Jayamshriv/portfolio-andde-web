@@ -187,7 +187,7 @@ p {
     width: 100%; /* Ensure the image fits the container */
     height: 100%; /* Ensure the image fits the container */
     border-radius: 20px; /* Match the container's rounded borders */
-    object-fit: cover;
+    object-fit: content;
 }
 
 .small-contact-image-in {
@@ -829,7 +829,7 @@ body {
 .intro-bg img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the div */
+    object-fit: contain; /* Ensure the image covers the div */
 }
 
 
@@ -883,7 +883,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     opacity: 0;
     transition: opacity 1s ease-in-out;
     border-radius: 50%;
@@ -936,7 +936,7 @@ body {
 .preview-image img {
     width: 72px;
     height: 72px;
-    object-fit: cover;
+    object-fit: contain;
     transition: all 0.3s ease;
 }
 .section-preview-image img {
