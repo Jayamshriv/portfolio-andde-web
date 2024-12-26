@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Guru Gobind Singh Indraprastha University',
                 description: 'Bachelors in Technology - Computer Science Engineering',
                 image: 'img/ggsipu%20imgae.png', // Replace with actual image path
-                achievements: ['CGPA: 9.1', 'Passout Batach: 2025']
+                achievements: ['CGPA: 9.1', 'Batch: 2025']
             },
             school: {
                 title: 'Mount Olivet Senior Secondary School',
