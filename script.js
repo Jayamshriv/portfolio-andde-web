@@ -536,8 +536,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
 // Device detection function
 function isDesktop() {
     const isDesktopSize = window.innerWidth >= 1024;
@@ -1050,7 +1048,6 @@ window.addEventListener('resize', () => {
     isDesktop();
 });
 
-
 // Initialize EmailJS with your User ID
 emailjs.init("pix-hlGvx0mZtmiOq"); // Replace with your User ID
 
@@ -1089,3 +1086,10 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         }
     );
 });
+
+// For testing - you can remove this later
+window.clearModalShown = function() {
+    localStorage.removeItem('modalShown');
+    location.reload();
+};
+
