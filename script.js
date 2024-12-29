@@ -232,38 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const images = ['D:/z_material/web/portfolio-andde-web/img/spacerr__app.png', 'img2.png', 'img3.png']; // Add your image paths here
-    let currentIndex = 0;
-    const introBg = document.querySelector('.intro-bg img');
-
-    function changeImage(imageIndex) {
-        const imageElement = document.querySelector('.current-slide-image');
-        if (!imageElement) {
-            console.error('Image element not found in DOM.');
-            return;
-        }
-    
-        const newSrc = 'img/spacerr__app.png';
-        fetch(newSrc)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`Image not found: ${newSrc}`);
-                }
-                return res.blob();
-            })
-            .then(() => {
-                imageElement.src = newSrc;
-            })
-            .catch((err) => {
-                console.error(err);
-                imageElement.src = `img/placeholder.jpg`; // Fallback placeholder
-            });
-    }
-    
-
-    setInterval(changeImage, 3000); // Change image every 3 seconds (adjust as needed)
-});
 // Timeline interaction handlers
 document.addEventListener('DOMContentLoaded', () => {
     // Experience section data
@@ -568,6 +536,87 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// First add the device detection and scroll indicator styles
+const styles = `
+.mobile-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1000;
+  max-width: 80%;
+}
+
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #32de84, #4CAF50, #388E3C);
+  transform-origin: 0 0;
+  pointer-events: none;
+  z-index: 1000;
+}`;
+
+// Add styles to document
+const styleSheet = document.createElement('style');
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+
+// Device detection function
+function isDesktop() {
+  return window.innerWidth >= 1024 && !('ontouchstart' in window);
+}
+
+// Scroll indicator for mobile
+class ScrollIndicator {
+  constructor() {
+    this.indicator = document.createElement('div');
+    this.indicator.className = 'scroll-indicator';
+    document.body.appendChild(this.indicator);
+    
+    this.updateScroll = this.updateScroll.bind(this);
+    window.addEventListener('scroll', this.updateScroll);
+    window.addEventListener('resize', this.updateScroll);
+    this.updateScroll();
+  }
+
+  updateScroll() {
+    const docHeight = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    ) - window.innerHeight;
+    
+    const scrolled = window.pageYOffset;
+    const width = (scrolled / docHeight) * 100;
+    this.indicator.style.transform = `scaleX(${width / 100})`;
+  }
+}
+
+// Mobile message component
+class MobileMessage {
+  constructor() {
+    this.message = document.createElement('div');
+    this.message.className = 'mobile-message';
+    this.message.innerHTML = `
+      <h3 style="margin: 0 0 10px 0">Desktop View Recommended</h3>
+      <p style="margin: 0">Please switch to a desktop or laptop for the best experience with our interactive Android animation.</p>
+    `;
+    document.body.appendChild(this.message);
+  }
+}
+
+// Initialize Android SVG with enhanced realistic eyes
+if (isDesktop()) {
 const androidLogoContainer = document.createElement('div');
 androidLogoContainer.style.position = 'fixed';
 androidLogoContainer.style.top = '20px';
@@ -964,7 +1013,23 @@ class EnhancedAndroidEyesAnimation {
 // Initialize the enhanced eyes animation
 const androidEyes = new EnhancedAndroidEyesAnimation();
 
-
+}
+else{
+    // Show mobile message and scroll indicator
+  new MobileMessage();
+  new ScrollIndicator();
+  
+  // Show static Android logo for mobile
+  androidLogoContainer.innerHTML = `
+    <svg height="300" width="300" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Static Android head -->
+      <g transform="translate(-130 ,-500) scale(2)" >
+        <path d="m263.837 306.59 21.9331-37.9944c1.2377-2.12998.48933-4.83565-1.61189-6.07335-2.1012-1.23768-4.83565-.5181-6.04456 1.61189l-22.221 38.4837c-16.9536-7.74281-36.0371-12.0604-56.5599-12.0604-20.5227 0-39.6063 4.31754-56.5599 12.0604l-22.221-38.4837c-1.2377-2.12999-3.94336-2.84957-6.07335-1.61189-2.13 1.2377-2.84959 3.94337-1.61189 6.07335l21.9331 37.9944c-37.8217 20.494-63.4392 58.7762-67.6703 103.592h264.407c-4.2312-44.8161-29.8487-83.0984-67.6991-103.592zm-125.209 66.4614c-6.13092 0-11.0817-4.97957-11.0817-11.0817 0-6.13093 4.97957-11.0817 11.0817-11.0817 6.13092 0 11.0817 4.97956 11.0817 11.0817.0289 6.10212-4.95079 11.0817-11.0817 11.0817zm121.381 0c-6.13091 0-11.0817-4.97957-11.0817-11.0817 0-6.13093 4.97958-11.0817 11.0817-11.0817 6.13093 0 11.0817 4.97956 11.0817 11.0817.0288 6.10212-4.95077 11.0817-11.0817 11.0817z"
+        fill="#32de84" stroke-width=".288"/>
+      </g>
+    </svg>
+  `;
+}
 // Initialize EmailJS with your User ID
 emailjs.init("pix-hlGvx0mZtmiOq"); // Replace with your User ID
 
