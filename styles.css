@@ -266,7 +266,7 @@ body {
 /* Glowing Dots for Timeline */
 .timeline-dot {
   position: absolute;
-  left: 20px; /* Adjust this value so the dot's center aligns with the timeline line */
+  left: 8px; /* Adjust this value so the dot's center aligns with the timeline line */
   top: 10px; /* Positions the dots vertically on the timeline */
   width: 12px;
   height: 12px;
@@ -378,7 +378,7 @@ body {
   }
 
   .timeline-dot {
-    left: 4px;
+    left: -10px;
   }
   .timeline-item {
     padding-left: 25px;
