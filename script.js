@@ -536,85 +536,99 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// First add the device detection and scroll indicator styles
-const styles = `
-.mobile-message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  z-index: 1000;
-  max-width: 80%;
-}
 
-.scroll-indicator {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #32de84, #4CAF50, #388E3C);
-  transform-origin: 0 0;
-  pointer-events: none;
-  z-index: 1000;
-}`;
-
-// Add styles to document
-const styleSheet = document.createElement('style');
-styleSheet.textContent = styles;
-document.head.appendChild(styleSheet);
 
 // Device detection function
 function isDesktop() {
-  return window.innerWidth >= 1024 && !('ontouchstart' in window);
-}
-
-// Scroll indicator for mobile
-class ScrollIndicator {
-  constructor() {
-    this.indicator = document.createElement('div');
-    this.indicator.className = 'scroll-indicator';
-    document.body.appendChild(this.indicator);
+    const isDesktopSize = window.innerWidth >= 1024;
+    const isNonTouch = !('ontouchstart' in window);
     
-    this.updateScroll = this.updateScroll.bind(this);
-    window.addEventListener('scroll', this.updateScroll);
-    window.addEventListener('resize', this.updateScroll);
-    this.updateScroll();
-  }
-
-  updateScroll() {
-    const docHeight = Math.max(
-      document.body.scrollHeight,
-      document.body.offsetHeight,
-      document.documentElement.clientHeight,
-      document.documentElement.scrollHeight,
-      document.documentElement.offsetHeight
-    ) - window.innerHeight;
+    const deviceWrapper = document.querySelector('.device-wrapper');
+    if (deviceWrapper) {
+        deviceWrapper.style.display = (isDesktopSize && isNonTouch) ? '' : 'none';
+    }
     
-    const scrolled = window.pageYOffset;
-    const width = (scrolled / docHeight) * 100;
-    this.indicator.style.transform = `scaleX(${width / 100})`;
-  }
+    return isDesktopSize && isNonTouch;
 }
 
-// Mobile message component
-class MobileMessage {
-  constructor() {
-    this.message = document.createElement('div');
-    this.message.className = 'mobile-message';
-    this.message.innerHTML = `
-      <h3 style="margin: 0 0 10px 0">Desktop View Recommended</h3>
-      <p style="margin: 0">Please switch to a desktop or laptop for the best experience with our interactive Android animation.</p>
-    `;
-    document.body.appendChild(this.message);
-  }
+// Storage functions
+function hasModalBeenShown() {
+    return localStorage.getItem('modalShown') === 'true';
 }
 
+function setModalAsShown() {
+    localStorage.setItem('modalShown', 'true');
+}
+
+// Desktop mode switching
+function switchToDesktopMode() {
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+        viewport.content = 'width=1024';
+    } else {
+        const meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=1024';
+        document.head.appendChild(meta);
+    }
+    location.reload();
+}
+
+// Scroll indicator class
+class HRScrollIndicator {
+    constructor() {
+        this.indicator = document.createElement('div');
+        this.indicator.className = 'hr-scroll-indicator';
+        document.body.appendChild(this.indicator);
+        
+        this.updateScroll = this.updateScroll.bind(this);
+        window.addEventListener('scroll', this.updateScroll);
+        window.addEventListener('resize', this.updateScroll);
+        this.updateScroll();
+    }
+
+    updateScroll() {
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        
+        requestAnimationFrame(() => {
+            this.indicator.style.transform = `scaleX(${scrolled / 100})`;
+        });
+    }
+}
+
+// Mobile modal class
+class MobileModal {
+    constructor() {
+        if (hasModalBeenShown()) {
+            return;
+        }
+
+        this.modal = document.createElement('div');
+        this.modal.className = 'mobile-modal';
+        this.modal.innerHTML = `
+            <h3 style="margin: 0 0 10px 0">Desktop View Recommended</h3>
+            <p style="margin: 0">Switch to desktop mode for the best experience with our interactive Android animation.</p>
+            <div class="mobile-modal-buttons">
+                <button class="modal-button switch-button" id="switchToDesktop">Switch to Desktop</button>
+                <button class="modal-button cancel-button" id="cancelSwitch">Continue Mobile</button>
+            </div>
+        `;
+        
+        document.body.appendChild(this.modal);
+        
+        document.getElementById('switchToDesktop').addEventListener('click', () => {
+            setModalAsShown();
+            switchToDesktopMode();
+        });
+        
+        document.getElementById('cancelSwitch').addEventListener('click', () => {
+            setModalAsShown();
+            this.modal.remove();
+        });
+    }
+}
 // Initialize Android SVG with enhanced realistic eyes
 if (isDesktop()) {
 const androidLogoContainer = document.createElement('div');
@@ -1017,7 +1031,7 @@ const androidEyes = new EnhancedAndroidEyesAnimation();
 else{
     // Show mobile message and scroll indicator
   new MobileMessage();
-  new ScrollIndicator();
+  new HRScrollIndicator();
   
   // Show static Android logo for mobile
   androidLogoContainer.innerHTML = `
@@ -1030,6 +1044,13 @@ else{
     </svg>
   `;
 }
+
+// Update visibility on resize
+window.addEventListener('resize', () => {
+    isDesktop();
+});
+
+
 // Initialize EmailJS with your User ID
 emailjs.init("pix-hlGvx0mZtmiOq"); // Replace with your User ID
 
